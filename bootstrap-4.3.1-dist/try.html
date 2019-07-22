@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/drawing.css">
+
+  <title>Hello, world!</title>
+</head>
+<body>
+  <!-- この中にhtmlの中身を書いていく -->
+
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  <script src="./js/three.min.js"></script>
+  <script src="./js/OrbitControls.js"></script>
+
+
+  <script type="text/javascript">
+    /* ここからWebGLの処理を記述 */
+    //シーンを作成
+    var scene = new THREE.Scene();
+
+    //カメラを作成
+    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+    camera.position.z = 9;
+
+    //カメラコントローラーを作成
+    const controls = new THREE.OrbitControls(camera);
+
+    //ここから3Dモデル生成のコード
+    //物体1(PC上部1)
+    //メッシュを作成（ジオメトリとマテリアルを元にメッシュを作成）
+    const geometry = new THREE.SphereGeometry( 5, 50, 50 );
+    // マテリアルにテクスチャーを設定
+    const material = new THREE.MeshStandardMaterial({
+      map: new THREE.TextureLoader().load('textures/planet0.jpg')
+    });
+    const mesh = new THREE.Mesh( geometry, material );
+    // 傾きを追加してみる
+    // オブジェクト名.rotation.set(x軸,y軸,z軸);
+    mesh.rotation.set(23.43,0,23.43);
+    //表示位置の設定
+    mesh.position.set(0,0,0);
+    //シーンに追加
+    scene.add(mesh);
+    //ここまでが3Dモデル生成のコード　生成物により変更
+
+    // 平行光源
+    //const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 1);
+    //directionalLight.position.set(1,1,1);
+    //シーンに追加
+    //scene.add(directionalLight);
+
+    //環境光
+    const light = new THREE.AmbientLight(0xFFFFFF, 1.5);
+    scene.add(light);
+
+    //レンダラに渡す
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize( window.innerWidth,window.innerHeight );
+    renderer.setClearColor(0xefff8dc, 1.0);  //初期 クリーム色
+
+    //bodyへ追加し、表示
+    document.body.appendChild(renderer.domElement);
+    //console.log(renderer.domElement);
+    //アニメーションさせる
+    var animate = function(){
+      requestAnimationFrame(animate);
+      // 回転行列を適用させる…？
+      // mesh.rotation.x -= 0.005;
+      // mesh.rotation.y += 0.01;
+      renderer.render( scene, camera );
+    };
+    animate();
+    //３Dモデル作成,描画に関する項目ここまで
+
+
+    //画面回転等でリサイズがあった場合の挙動
+    //初期化
+    onResize();
+
+    //リサイズイベント発生時に実行
+    window.addEventListener('resize', onResize);
+
+    function onResize() {  // サイズを取得
+      var width = window.innerWidth;
+      var height = window.innerHeight;
+
+      // レンダラのサイズを調整する
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(width, height);
+
+      // カメラのアスペクト比を正す
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+    }
+    //画面サイズ変更に関する項目ここまで
+  </script>
+
+
+</body>
+</html>
