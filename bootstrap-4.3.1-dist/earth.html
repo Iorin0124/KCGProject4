@@ -46,6 +46,10 @@
       map: new THREE.TextureLoader().load('textures/planet03.jpg')
     });
     const mesh = new THREE.Mesh( geometry, material );
+	
+	//メッシュの更新を許可
+	mesh.needsUpdate = true;
+	
     // 傾きを追加してみる
     // オブジェクト名.rotation.set(x軸,y軸,z軸);
     //mesh.rotation.set((-23.4*Math.PI/180),0,(-23.4*Math.PI/180));
@@ -61,7 +65,8 @@
     //directionalLight.position.set(1,1,1);
     //シーンに追加
     //scene.add(directionalLight);
-
+	
+	
     //環境光
     const light = new THREE.AmbientLight(0xFFFFFF, 1.5);
     scene.add(light);
@@ -75,6 +80,10 @@
     document.body.appendChild(renderer.domElement);
     //console.log(renderer.domElement);
     //アニメーションさせる
+	
+	var planetRot = 0;
+	var RotateY = 0.05;
+	
     var animate = function(){
       requestAnimationFrame(animate);
 
@@ -85,6 +94,16 @@
       mesh.rotation.y += 0.008;
       mesh.rotation.x = -23.4*Math.PI/180;
       mesh.rotation.z = -23.4*Math.PI/180;
+	  
+	  //物体の移動
+	  planetRot -= 0.3;
+	  mesh.position.x = Math.cos(THREE.Math.degToRad(planetRot))*30;
+	  mesh.position.z = Math.sin(THREE.Math.degToRad(planetRot))*30;
+	  
+	  
+	  /*if(mesh.position.y>=12.25 || mesh.position.y<=-12.25)RotateY *= -1;
+	  mesh.position.y -= RotateY;*/
+	  
       renderer.render( scene, camera );
     };
     animate();
@@ -111,6 +130,31 @@
       camera.updateProjectionMatrix();
     }
     //画面サイズ変更に関する項目ここまで
+	
+	var onmousedown = function(e) {
+    var rect = e.target.getBoundingClientRect();
+    //画面上のマウス位置
+    var mouseX = e.clientX - rect.left;
+    var mouseY = e.clientY - rect.top;
+    
+    //canvas内のマウス位置
+    mouseX = (mouseX/window.innerWidth) *2 - 1;
+    mouseY =-(mouseY/window.innerHeight)*2 + 1;
+    
+    //マウスのベクトル
+    var pos = new THREE.Vector3(mouseX, mouseY, 1);
+    pos.unproject(camera);
+    
+	//マウスの位置上にレイを生成
+    var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
+    var obj = ray.intersectObjects([mesh]);
+    
+    //０より大きい場合、オブジェクトに交差する
+    if (obj.length > 0) {
+		
+		console.log("nyaaaa");
+    }
+};
   </script>
 
 
