@@ -3,7 +3,7 @@
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -24,22 +24,43 @@
   <script src="./js/three.min.js"></script>
   <script src="./js/OrbitControls.js"></script>
 
-
   <script type="text/javascript">
+    /* ここからスマホ挙動の調整 */
+    // スクロールの改善
+    // "passive" が使えるかどうかを検出
+    var passiveSupported = false;
+    try {
+      document.addEventListener("test", null, Object.defineProperty({}, "passive", {
+        get: function() {
+          passiveSupported = true;
+        }
+      }));
+    } catch(err) {}
+    // リスナーを登録
+    document.addEventListener("touchmove", function listener(e) {
+      /* do something */
+      e.preventDefault();
+    }, passiveSupported ? { passive: false } : false);
+    // スマホ画面での挙動調整ここまで
+
+
+
+
+
     /* ここからWebGLの処理を記述 */
-    //シーンを作成
+    // シーンを作成
     var scene = new THREE.Scene();
 
-    //カメラを作成
-    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
-    camera.position.z = 9;
+    // カメラを作成
+    var camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 1, 10000 );
+    camera.position.z = 30;
 
-    //カメラコントローラーを作成
+    // カメラコントローラーを作成
     const controls = new THREE.OrbitControls(camera);
 
-    //ここから3Dモデル生成のコード
-    //物体1(PC上部1)
-    //メッシュを作成（ジオメトリとマテリアルを元にメッシュを作成）
+    // ここから3Dモデル生成のコード
+    // 物体1(PC上部1)
+    // メッシュを作成（ジオメトリとマテリアルを元にメッシュを作成）
     const geometry = new THREE.SphereGeometry( 5, 50, 50 );
     // マテリアルにテクスチャーを設定
     const material = new THREE.MeshStandardMaterial({
@@ -48,35 +69,43 @@
     const mesh = new THREE.Mesh( geometry, material );
     // 傾きを追加してみる
     // オブジェクト名.rotation.set(x軸,y軸,z軸);
-    //mesh.rotation.set((-23.4*Math.PI/180),0,(-23.4*Math.PI/180));
+    // mesh.rotation.set((-23.4*Math.PI/180),0,(-23.4*Math.PI/180));
     mesh.rotation.set((-23.4*Math.PI/180),0,(-23.4*Math.PI/180));
-    //表示位置の設定
+    // 表示位置の設定
     mesh.position.set(0,0,0);
-    //シーンに追加
+    // シーンに追加
     scene.add(mesh);
-    //ここまでが3Dモデル生成のコード　生成物により変更
+    // ここまでが3Dモデル生成のコード　生成物により変更
 
     // 平行光源
-    //const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 1);
-    //directionalLight.position.set(1,1,1);
-    //シーンに追加
-    //scene.add(directionalLight);
+    const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 0.5);
+    directionalLight.position.set(0,0,1);
+    // シーンに追加
+    scene.add(directionalLight);
 
-    //環境光
-    const light = new THREE.AmbientLight(0xFFFFFF, 1.5);
+    // 環境光
+    const light = new THREE.AmbientLight(0xFFFFFF, 2.5);
     scene.add(light);
 
-    //レンダラに渡す
+    // レンダラに渡す
     var renderer = new THREE.WebGLRenderer();
     renderer.setSize( window.innerWidth,window.innerHeight );
     renderer.setClearColor(0xefff8dc, 1.0);  //初期 クリーム色
 
-    //bodyへ追加し、表示
+    // bodyへ追加し、表示
     document.body.appendChild(renderer.domElement);
-    //console.log(renderer.domElement);
-    //アニメーションさせる
+    // console.log(renderer.domElement);
+
+
+    // 毎フレーム実行 (アニメーションさせる)
     var animate = function(){
       requestAnimationFrame(animate);
+
+      // カメラを操作する
+      //常に原点を見つめる
+      camera.lookAt(new THREE.Vector3(0,0,0))
+
+
 
       // 回転行列を適用させる…？
       //   mesh.rotation.x -= 0.005;
@@ -87,15 +116,16 @@
       mesh.rotation.z = -23.4*Math.PI/180;
       renderer.render( scene, camera );
     };
+
     animate();
-    //３Dモデル作成,描画に関する項目ここまで
+    // ３Dモデル作成,描画に関する項目ここまで
 
 
-    //画面回転等でリサイズがあった場合の挙動
-    //初期化
+    // 画面回転等でリサイズがあった場合の挙動
+    // 初期化
     onResize();
 
-    //リサイズイベント発生時に実行
+    // リサイズイベント発生時に実行
     window.addEventListener('resize', onResize);
 
     function onResize() {  // サイズを取得
@@ -110,7 +140,7 @@
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
     }
-    //画面サイズ変更に関する項目ここまで
+    // 画面サイズ変更に関する項目ここまで
   </script>
 
 
