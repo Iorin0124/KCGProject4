@@ -1,8 +1,79 @@
 /* WebGL用全体設定 */
-*{
-  margin: 0px;
-  padding: 0px;
+body {
+    position: fixed;
 }
-body{
-  position: fixed;
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* 画面上部と下部の幅設定 */
+.h-8 {
+    height: 8%;
+    width: 100%;
+    position: fixed;
+}
+
+/*　ハンバーガーメニューのアイコン余白　*/
+.margin-02 {
+    margin: 2px;
+}
+
+/* キャンバスカラー変更に伴っての背景色変更用クラス */
+.bg-cream {
+    background-color: #fff8dc;
+}
+
+.bg-lightblue {
+    background-color: #f0f8ff;
+}
+
+.bg-black {
+    background-color: #000000;
+}
+
+/* ハンバーガーメニュー内のラジオボタン */
+li input[type=radio] {
+    display: none;
+}
+
+/* ハンバーガーメニュー内のコンテンツ */
+#drawer-space label, a.link {
+    display: block;
+    margin: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+    cursor: pointer;
+    border: 2px solid #08088A;
+    border-radius: 5px;
+}
+
+/* ハンバーガーメニュー内の背景色変更見本(クリーム色) */
+#bg-color1 {
+    color: black;
+    background-color: #fff8dc;
+}
+
+/* ハンバーガーメニュー内の背景色変更見本(薄青色) */
+#bg-color2 {
+    color: black;
+    background-color: #f0f8ff;
+}
+
+/* ハンバーガーメニュー内の背景色変更見本(黒色) */
+#bg-color3 {
+    color: white;
+    background-color: #000000;
+}
+
+/*　コピーライト　*/
+h6{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #08088A;
 }
