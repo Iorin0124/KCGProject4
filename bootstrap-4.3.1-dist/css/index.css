@@ -1,11 +1,19 @@
 /* トップページのCSS */
 html {
     height: 100%;
+    width: 100%;
 }
 
 body {
     height: 100%;
+    width: 100%;
     margin: 0;
+    position: fixed;
+}
+
+* {
+    margin: 0;
+    padding: 0;
 }
 
 /* カーソルが重なった時にふわっと色を変更 */
@@ -14,7 +22,6 @@ a {
     text-decoration: none;
     position: relative;
     display: inline-block;
-    transition: .3s;
 }
 
 a::after {
@@ -65,7 +72,7 @@ a:hover::after {
 /* nav要素の下部寄せ */
 .bottom-0 {
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
 }
 
 /* トップページの画像格納div */
