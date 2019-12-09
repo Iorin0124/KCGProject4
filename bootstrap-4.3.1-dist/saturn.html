@@ -160,7 +160,8 @@
     const mesh2 = new THREE.Mesh(geometry2, material2);
     // 傾きを追加してみる
     // オブジェクト名.rotation.set(x軸,y軸,z軸);
-    //mesh.rotation.set((-23.4*Math.PI/180),0,(-23.4*Math.PI/180));
+    mesh.rotation.set((-25.33*Math.PI/180),0,(-25.33*Math.PI/180));
+	//mesh2.rotation.set((-25.33*Math.PI/180),0,(-25.33*Math.PI/180));
 
     //表示位置の設定
     mesh2.position.set(0, 0, 0);
@@ -197,10 +198,10 @@
 
         // 回転行列を適用させる…？
         //   mesh.rotation.x -= 0.005;
-        mesh.rotation.x += 0.01;
-        mesh.rotation.z += 0.01;
-        mesh2.rotation.x += 0.01;
-        mesh2.rotation.z += 0.01;
+        mesh.rotation.x += 0.025;
+        mesh.rotation.z += 0.025;
+        //mesh2.rotation.x += 0.025;
+        //mesh2.rotation.z += 0.025;
         renderer.render(scene, camera);
     };
     animate();
