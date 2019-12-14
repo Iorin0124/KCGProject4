@@ -161,7 +161,7 @@
     // 傾きを追加してみる
     // オブジェクト名.rotation.set(x軸,y軸,z軸);
     mesh.rotation.set((-25.33*Math.PI/180),0,(-25.33*Math.PI/180));
-	//mesh2.rotation.set((-25.33*Math.PI/180),0,(-25.33*Math.PI/180));
+	mesh2.rotation.set((-80*Math.PI/180),(25.33*Math.PI/180),(-55.33*Math.PI/180));
 
     //表示位置の設定
     mesh2.position.set(0, 0, 0);
@@ -199,7 +199,7 @@
         // 回転行列を適用させる…？
         //   mesh.rotation.x -= 0.005;
         mesh.rotation.x += 0.025;
-        mesh.rotation.z += 0.025;
+        //mesh.rotation.z += 0.025;
         //mesh2.rotation.x += 0.025;
         //mesh2.rotation.z += 0.025;
         renderer.render(scene, camera);
