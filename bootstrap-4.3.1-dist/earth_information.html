@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="css/planetList.css">
 
   <title>地球の情報</title>
@@ -46,23 +45,20 @@
       </div>
     </div>
     <!-- ヘッダーここまで -->
+
   <!-- コンテンツ -->
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-2"></div>
       <!-- メインエリア -->
       <div class="col-md-8">
-          <table class="table table-striped table-condensed w-100">
+          <table class="table table-striped table-condensed w-100 mb-4">
             <thead>
               <tr><th colspan="2" class="text-center">地球の情報</th></tr>
             </thead>
-            <tbody id="info">
-<!--              <tr><th>名前</th><td>地球</td></tr>-->
-<!--              <tr><th>名前</th><td>地球</td></tr>-->
-<!--              <tr><th>名前</th><td>地球</td></tr>-->
-<!--              <tr><th>名前</th><td>地球</td></tr>-->
-            </tbody>
+            <tbody id="info"></tbody>
           </table>
+        <a class="btn btn-outline-primary float-right mb-4" href="planetList.html" role="button">惑星一覧に戻る</a>
       </div>
       <!-- メインエリアここまで -->
       <div class="col-md-2"></div>
@@ -98,10 +94,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 	<script src="js/planet_information.js"></script>
 
-	<script type="javascript">
-      console.log('hoge');
+	<script>
 		var planet = planet['earth'];
-		// console.log(planet);
 		var info = "<tr><th>名前</th><td>"+planet['name']+"</td></tr>"+
                 "<tr><th>太陽からの平均距離</th><td>"+planet['distance']+"</td></tr>"+
                 "<tr><th>直径</th><td>"+planet['dimater']+"</td></tr>"+
