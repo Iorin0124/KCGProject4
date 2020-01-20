@@ -216,14 +216,14 @@
 			var target = new THREE.Quaternion();
 			var axis = new THREE.Vector3(0, 1, 0).normalize();
 			target.setFromAxisAngle(axis, Math.PI/280);
-			
-			var target = new THREE.Quaternion();
-			var axis = new THREE.Vector3(0, 0, 1).normalize();
-			target.setFromAxisAngle(axis, Math.PI/280);
-			
-			quaternion2.multiply(target);
+
+			var target2 = new THREE.Quaternion();
+			var axis2 = new THREE.Vector3(0, 0, 1).normalize();
+			target2.setFromAxisAngle(axis2, Math.PI/280);
+
+			quaternion2.multiply(target2);
 			quaternion.multiply(target);
-			
+
 			}
     };
     animate();
