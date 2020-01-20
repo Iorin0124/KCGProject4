@@ -175,13 +175,6 @@
       //常に原点を見つめる
       camera.lookAt(new THREE.Vector3(0, 0, 0));
 
-      // 回転行列を適用させる…？
-      //   mesh.rotation.x -= 0.005;
-      mesh.rotation.x = 23.4 * Math.PI / 180;
-      mesh.rotation.z = 23.4 * Math.PI / 180;
-      mesh.rotation.y += 0.008;
-      mesh.rotation.x = -23.4 * Math.PI / 180;
-      mesh.rotation.z = -23.4 * Math.PI / 180;
       renderer.render(scene, camera);
     };
     animate();
