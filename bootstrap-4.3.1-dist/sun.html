@@ -78,15 +78,13 @@
     var animate = function(){
       requestAnimationFrame(animate);
 
-      // 回転行列を適用させる…？
-      //   mesh.rotation.x -= 0.005;
-      mesh.rotation.x += 0.01;
-      mesh.rotation.z += 0.01;
-      renderer.render( scene, camera );
+      // カメラを操作する
+      //常に原点を見つめる
+      camera.lookAt(new THREE.Vector3(0, 0, 0));
+      renderer.render(scene, camera);
     };
-    animate();
-    //３Dモデル作成,描画に関する項目ここまで
 
+    animate();
 
     //画面回転等でリサイズがあった場合の挙動
     //初期化
