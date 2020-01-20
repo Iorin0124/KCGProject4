@@ -90,6 +90,7 @@
   });
   // ハンバーガーメニューここまで
 
+  var flg = false;
   // 背景色が変更された時の挙動
   $(function () {
     $('input[name="radio_bg-color"]:radio').change(function () {
@@ -141,13 +142,16 @@
     const mesh = new THREE.Mesh(geometry, material);
     // 傾きを追加してみる
     // オブジェクト名.rotation.set(x軸,y軸,z軸);
-    mesh.rotation.set((-23.4*Math.PI/180),0,(-23.4*Math.PI/180));
+    //mesh.rotation.set((-23.4*Math.PI/180),0,(-23.4*Math.PI/180));
 
     //表示位置の設定
     mesh.position.set(0, 0, 0);
     //シーンに追加
     scene.add(mesh);
     //ここまでが3Dモデル生成のコード　生成物により変更
+
+	//メッシュの更新を許可
+    mesh.needsUpdate = true;
 
     // 平行光源
     //const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 1);
@@ -175,6 +179,16 @@
       //常に原点を見つめる
       camera.lookAt(new THREE.Vector3(0, 0, 0));
       renderer.render(scene, camera);
+	  
+	  if(flg){
+			var quaternion = mesh.quaternion;
+			
+			var target = new THREE.Quaternion();
+			var axis = new THREE.Vector3(0, 1, 0).normalize();
+			target.setFromAxisAngle(axis, Math.PI/2500);
+			
+			quaternion.multiply(target);
+			}
     };
 
     animate();
@@ -200,6 +214,58 @@
     }
 
     //画面サイズ変更に関する項目ここまで
+	
+	var onmousedown = function(e) {
+		var rect = e.target.getBoundingClientRect();
+		//画面上のマウス位置
+		var mouseX = e.clientX - rect.left;
+		var mouseY = e.clientY - rect.top;
+		
+		//canvas内のマウス位置
+		mouseX = (mouseX/window.innerWidth) *2 - 1;
+		mouseY =-(mouseY/window.innerHeight)*2 + 1;
+		
+		//マウスのベクトル
+		var pos = new THREE.Vector3(mouseX, mouseY, 1);
+		pos.unproject(camera);
+		
+		//マウスの位置上にレイを生成
+		var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
+		var obj = ray.intersectObjects([mesh]);
+		
+		//０より大きい場合、オブジェクトに交差する
+		if (obj.length > 0) {
+			flg = flg ? false : true;
+			console.log("nyaaaa");
+		}
+	};
+	
+	var ontouchend = function(e) {
+		var rect = e.target.getBoundingClientRect();
+		//画面上のマウス位置
+		var mouseX = e.clientX - rect.left;
+		var mouseY = e.clientY - rect.top;
+		
+		//canvas内のマウス位置
+		mouseX = (mouseX/window.innerWidth) *2 - 1;
+		mouseY =-(mouseY/window.innerHeight)*2 + 1;
+		
+		//マウスのベクトル
+		var pos = new THREE.Vector3(mouseX, mouseY, 1);
+		pos.unproject(camera);
+		
+		//マウスの位置上にレイを生成
+		var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
+		var obj = ray.intersectObjects([mesh]);
+		
+		//０より大きい場合、オブジェクトに交差する
+		if (obj.length > 0) {
+			flg = flg ? false : true;
+			console.log("nyaaaa");
+		}
+		
+		
+};
 </script>
 
 
