@@ -144,7 +144,7 @@
     const mesh = new THREE.Mesh(geometry, material);
     // 傾きを追加してみる
     // オブジェクト名.rotation.set(x軸,y軸,z軸);
-    //mesh.rotation.set((-23.4*Math.PI/180),0,(-23.4*Math.PI/180));
+    //mesh.rotation.set((-25.33*Math.PI/180),0,(-25.33*Math.PI/180));
 
     //表示位置の設定
     mesh.position.set(0, 0, 0);
@@ -180,7 +180,7 @@
     // scene.add(directionalLight);
 
     //環境光
-    const light = new THREE.AmbientLight(0xFFFFFF, 2.5);
+    const light = new THREE.AmbientLight(0xFFFFFF, 2.3);
     scene.add(light);
 
     //レンダラに渡す
@@ -225,7 +225,6 @@
 			quaternion.multiply(target);
 			
 			}
-
     };
     animate();
     //３Dモデル作成,描画に関する項目ここまで
