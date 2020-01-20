@@ -91,6 +91,7 @@
     });
     // ハンバーガーメニューここまで
 
+	var flg =false;
     // 背景色が変更された時の挙動
     $(function () {
         $('input[name="radio_bg-color"]:radio').change(function () {
@@ -155,13 +156,13 @@
     const geometry2 = new THREE.TorusGeometry(7, 1.2, 2, 100);
     // マテリアルにテクスチャーを設定
     const material2 = new THREE.MeshStandardMaterial({
-        map: new THREE.TextureLoader().load('textures/jupiter.jpg')
+        map: new THREE.TextureLoader().load('textures/saturn_ring.jpg')
     });
     const mesh2 = new THREE.Mesh(geometry2, material2);
     // 傾きを追加してみる
     // オブジェクト名.rotation.set(x軸,y軸,z軸);
     mesh.rotation.set((-25.33*Math.PI/180),0,(-25.33*Math.PI/180));
-	mesh2.rotation.set((-80*Math.PI/180),(25.33*Math.PI/180),(-55.33*Math.PI/180));
+	mesh2.rotation.set((-110*Math.PI/180),(25.33*Math.PI/180),(80.33*Math.PI/180));
 
     //表示位置の設定
     mesh2.position.set(0, 0, 0);
@@ -169,6 +170,9 @@
     scene.add(mesh2);
     //ここまでが3Dモデル生成のコード　生成物により変更
 
+	//メッシュの更新を許可
+    mesh.needsUpdate = true;
+	
     // // 平行光源
     // const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 0.5);
     // directionalLight.position.set(0, 0, 1);
@@ -198,11 +202,30 @@
 
         // 回転行列を適用させる…？
         //   mesh.rotation.x -= 0.005;
-        mesh.rotation.x += 0.025;
+        //mesh.rotation.x += 0.025;
         //mesh.rotation.z += 0.025;
         //mesh2.rotation.x += 0.025;
         //mesh2.rotation.z += 0.025;
-        renderer.render(scene, camera);
+        //renderer.render(scene, camera);
+		
+		renderer.render(scene, camera);
+		if(flg){
+			var quaternion = mesh.quaternion;
+			var quaternion2 = mesh2.quaternion;
+
+			var target = new THREE.Quaternion();
+			var axis = new THREE.Vector3(0, 1, 0).normalize();
+			target.setFromAxisAngle(axis, Math.PI/280);
+			
+			var target = new THREE.Quaternion();
+			var axis = new THREE.Vector3(0, 0, 1).normalize();
+			target.setFromAxisAngle(axis, Math.PI/280);
+			
+			quaternion2.multiply(target);
+			quaternion.multiply(target);
+			
+			}
+
     };
     animate();
     //３Dモデル作成,描画に関する項目ここまで
@@ -229,6 +252,32 @@
     }
 
     //画面サイズ変更に関する項目ここまで
+	
+	    var onmousedown = function(e) {
+    var rect = e.target.getBoundingClientRect();
+    //画面上のマウス位置
+    var mouseX = e.clientX - rect.left;
+    var mouseY = e.clientY - rect.top;
+    
+    //canvas内のマウス位置
+    mouseX = (mouseX/window.innerWidth) *2 - 1;
+    mouseY =-(mouseY/window.innerHeight)*2 + 1;
+    
+    //マウスのベクトル
+    var pos = new THREE.Vector3(mouseX, mouseY, 1);
+    pos.unproject(camera);
+    
+    //マウスの位置上にレイを生成
+    var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
+    var obj = ray.intersectObjects([mesh]);
+    
+    //０より大きい場合、オブジェクトに交差する
+    if (obj.length > 0) {
+        flg = flg ? false : true;
+        console.log("nyaaaa");
+    }
+};
+
 </script>
 
 

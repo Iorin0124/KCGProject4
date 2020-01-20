@@ -91,6 +91,7 @@
     });
     // ハンバーガーメニューここまで
 
+	var flg =false;
     // 背景色が変更された時の挙動
     $(function () {
         $('input[name="radio_bg-color"]:radio').change(function () {
@@ -160,9 +161,18 @@
 
         // 回転行列を適用させる…？
         //   mesh.rotation.x -= 0.005;
-        mesh.rotation.x += 0.011;
-        mesh.rotation.z += 0.011;
+        /*mesh.rotation.x += 0.011;
+        mesh.rotation.z += 0.011;*/
         renderer.render(scene, camera);
+		if(flg){
+			var quaternion = mesh.quaternion;
+			
+			var target = new THREE.Quaternion();
+			var axis = new THREE.Vector3(0, 1, 0).normalize();
+			target.setFromAxisAngle(axis, Math.PI/1000);
+			
+			quaternion.multiply(target);
+			}
     };
     animate();
     //３Dモデル作成,描画に関する項目ここまで
@@ -189,6 +199,32 @@
     }
 
     //画面サイズ変更に関する項目ここまで
+	
+	    var onmousedown = function(e) {
+    var rect = e.target.getBoundingClientRect();
+    //画面上のマウス位置
+    var mouseX = e.clientX - rect.left;
+    var mouseY = e.clientY - rect.top;
+    
+    //canvas内のマウス位置
+    mouseX = (mouseX/window.innerWidth) *2 - 1;
+    mouseY =-(mouseY/window.innerHeight)*2 + 1;
+    
+    //マウスのベクトル
+    var pos = new THREE.Vector3(mouseX, mouseY, 1);
+    pos.unproject(camera);
+    
+    //マウスの位置上にレイを生成
+    var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
+    var obj = ray.intersectObjects([mesh]);
+    
+    //０より大きい場合、オブジェクトに交差する
+    if (obj.length > 0) {
+        flg = flg ? false : true;
+        console.log("nyaaaa");
+    }
+};
+
 </script>
 
 
