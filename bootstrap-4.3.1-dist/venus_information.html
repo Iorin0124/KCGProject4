@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="css/planetList.css">
 
   <title>金星の情報</title>
@@ -48,9 +47,23 @@
     <!-- ヘッダーここまで -->
 
     <!-- コンテンツ -->
-
-
-
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <!-- メインエリア -->
+      <div class="col-md-8">
+        <table class="table table-striped table-condensed w-100 mb-4">
+          <thead>
+          <tr><th colspan="2" class="text-center">金星の情報</th></tr>
+          </thead>
+          <tbody id="info"></tbody>
+        </table>
+        <a class="btn btn-outline-primary float-right mb-4" href="planetList.html" role="button">惑星一覧に戻る</a>
+      </div>
+      <!-- メインエリアここまで -->
+      <div class="col-md-2"></div>
+    </div>
+  </div>
     <!-- コンテンツここまで -->
 
     <!-- フッター -->
@@ -79,11 +92,23 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-	<script>
-		var planet = planet['venus'];
-		//console.log(earth);
-		var info = "<li>名前</li>"+planet['name']+"<li>太陽からの平均距離</li>"+planet['distance']+"<li>直径</li>"+planet['dimater']+"<li>表面積</li>"+planet['area']+"<li>体積</li>"+planet['volume']+"<li>質量</li>"+planet['mass']+"<li>平均密度</li>"+planet['denstiy']+"<li>公転周期</li>"+planet['revolution']+"<li>自転周期</li>"+planet['rotation']+"<li>表面温度　最低,平均,最高</li>"+planet['temp'].min+","+planet['temp'].ave+","+planet['temp'].max+"<li>衛星の数</li>"+planet['satellite'];
-		document.getElementById('info').innerHTML = info;
-	</script>
+  <script src="js/planet_information.js"></script>
+
+  <script>
+    var planet = planet['venus'];
+    var info = "<tr><th>名前</th><td>"+planet['name']+"</td></tr>"+
+            "<tr><th>太陽からの平均距離</th><td>"+planet['distance']+"</td></tr>"+
+            "<tr><th>直径</th><td>"+planet['dimater']+"</td></tr>"+
+            "<tr><th>表面積</th><td>"+planet['area']+"</td></tr>"+
+            "<tr><th>体積</th><td>"+planet['volume']+"</td></tr>"+
+            "<tr><th>質量</th><td>"+planet['mass']+"</td></tr>"+
+            "<tr><th>平均密度</th><td>"+planet['denstiy']+"</td></tr>"+
+            "<tr><th>公転周期</th><td>"+planet['revolution']+"</td></tr>"+
+            "<tr><th>自転周期</th><td>"+planet['rotation']+"</td></tr>"+
+            "<tr><th>表面温度(最低,平均,最高)</th><td>"+planet['temp'].min+","+planet['temp'].ave+","+planet['temp'].max+"</td></tr>"+
+            "<tr><th>衛星の数</th><td>"+planet['satellite']+"</td></tr>";
+    document.getElementById('info').innerHTML = info;
+  </script>
+
   </body>
   </html>

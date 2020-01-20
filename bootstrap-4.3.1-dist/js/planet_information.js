@@ -65,7 +65,7 @@ var planet = {
 			ave:'288K',
 			max:'333K',
 		},
-		satellite:'1個'
+		satellite:'1個(月)'
 	},
 	mars:{
 		name:'火星',

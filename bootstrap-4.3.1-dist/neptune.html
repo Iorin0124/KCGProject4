@@ -102,6 +102,26 @@
     //背景色に関する項目ここまで
 
 
+    /* ここからスマホ挙動の調整 */
+    // スクロールの改善
+    // "passive" が使えるかどうかを検出
+    var passiveSupported = false;
+    try {
+        document.addEventListener("test", null, Object.defineProperty({}, "passive", {
+            get: function () {
+                passiveSupported = true;
+            }
+        }));
+    } catch (err) {
+    }
+    // リスナーを登録
+    document.addEventListener("touchmove", function listener(e) {
+        /* do something */
+        e.preventDefault();
+    }, passiveSupported ? {passive: false} : false);
+    // スマホ画面での挙動調整ここまで
+
+
     /* ここからWebGLの処理を記述 */
     //シーンを作成
     var scene = new THREE.Scene();
@@ -153,11 +173,11 @@
 
     // 毎フレーム実行 (アニメーションさせる)
     var animate = function () {
-      requestAnimationFrame(animate);
+        requestAnimationFrame(animate);
 
-      // カメラを操作する
-      //常に原点を見つめる
-      camera.lookAt(new THREE.Vector3(0, 0, 0));
+        // カメラを操作する
+        //常に原点を見つめる
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
 
         // 回転行列を適用させる…？
         //   mesh.rotation.x -= 0.005;
