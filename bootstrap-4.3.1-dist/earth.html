@@ -227,29 +227,57 @@
     }
     //画面サイズ変更に関する項目ここまで
 
-	    var onmousedown = function(e) {
-    var rect = e.target.getBoundingClientRect();
-    //画面上のマウス位置
-    var mouseX = e.clientX - rect.left;
-    var mouseY = e.clientY - rect.top;
-    
-    //canvas内のマウス位置
-    mouseX = (mouseX/window.innerWidth) *2 - 1;
-    mouseY =-(mouseY/window.innerHeight)*2 + 1;
-    
-    //マウスのベクトル
-    var pos = new THREE.Vector3(mouseX, mouseY, 1);
-    pos.unproject(camera);
-    
-    //マウスの位置上にレイを生成
-    var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
-    var obj = ray.intersectObjects([mesh]);
-    
-    //０より大きい場合、オブジェクトに交差する
-    if (obj.length > 0) {
-        flg = flg ? false : true;
-        console.log("nyaaaa");
-    }
+	var onmousedown = function(e) {
+		var rect = e.target.getBoundingClientRect();
+		//画面上のマウス位置
+		var mouseX = e.clientX - rect.left;
+		var mouseY = e.clientY - rect.top;
+		
+		//canvas内のマウス位置
+		mouseX = (mouseX/window.innerWidth) *2 - 1;
+		mouseY =-(mouseY/window.innerHeight)*2 + 1;
+		
+		//マウスのベクトル
+		var pos = new THREE.Vector3(mouseX, mouseY, 1);
+		pos.unproject(camera);
+		
+		//マウスの位置上にレイを生成
+		var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
+		var obj = ray.intersectObjects([mesh]);
+		
+		//０より大きい場合、オブジェクトに交差する
+		if (obj.length > 0) {
+			flg = flg ? false : true;
+			console.log("nyaaaa");
+		}
+		
+		
+};
+	var ontouchend = function(e) {
+		var rect = e.target.getBoundingClientRect();
+		//画面上のマウス位置
+		var mouseX = e.clientX - rect.left;
+		var mouseY = e.clientY - rect.top;
+		
+		//canvas内のマウス位置
+		mouseX = (mouseX/window.innerWidth) *2 - 1;
+		mouseY =-(mouseY/window.innerHeight)*2 + 1;
+		
+		//マウスのベクトル
+		var pos = new THREE.Vector3(mouseX, mouseY, 1);
+		pos.unproject(camera);
+		
+		//マウスの位置上にレイを生成
+		var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
+		var obj = ray.intersectObjects([mesh]);
+		
+		//０より大きい場合、オブジェクトに交差する
+		if (obj.length > 0) {
+			flg = flg ? false : true;
+			console.log("nyaaaa");
+		}
+		
+		
 };
 
 	
