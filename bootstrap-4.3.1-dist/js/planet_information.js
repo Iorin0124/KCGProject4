@@ -1,4 +1,13 @@
 var planet = {
+	solar_system:{
+		name:'太陽系',
+		stellar:'1個(太陽)',
+		planet:'8個(水星、金星、地球、火星、木星、土星、天王星、海王星)',
+		satellite:'608個',
+		age:'45億6800万年',
+		distance:'25000-28000光年',
+		rotation:'2億2500万-2億5000万年'
+	},
 	sun:{
 		name:'太陽',
 		distance:'なし',
@@ -65,7 +74,7 @@ var planet = {
 			ave:'288K',
 			max:'333K',
 		},
-		satellite:'1個(月)'
+		satellite:'1個'
 	},
 	mars:{
 		name:'火星',
