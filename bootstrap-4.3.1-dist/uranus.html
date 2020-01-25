@@ -40,16 +40,12 @@
 </button>
 <nav class="drawer-nav">
     <ul class="drawer-menu" id="drawer-space">
-        <!--            <li class="pb-1"><input type="radio" id="radio-solar" name="radio_solar"><label for="radio-solar" id="bg-solar">太陽表示切り替え</label></li>-->
-        <li><input type="radio" id="radio-bg-galaxy" name="radio_bg-color" value="#fff8dc"><label for="radio-bg-galaxy"
-                                                                                                  id="bg-galaxy">銀河</label>
-        </li>
-        <li><input type="radio" id="radio-bg-color1" name="radio_bg-color" value="#fff8dc" checked="checked"><label
+        <li><input type="radio" id="radio-bg-color1" name="radio_bg-color" value="#fff8dc"><label
                 for="radio-bg-color1" id="bg-color1">背景色1</label></li>
         <li><input type="radio" id="radio-bg-color2" name="radio_bg-color" value="#f0f8ff"><label for="radio-bg-color2"
                                                                                                   id="bg-color2">背景色2</label>
         </li>
-        <li><input type="radio" id="radio-bg-color3" name="radio_bg-color" value="#000000"><label for="radio-bg-color3"
+        <li><input type="radio" id="radio-bg-color3" name="radio_bg-color" value="#202020" checked="checked"><label for="radio-bg-color3"
                                                                                                   id="bg-color3">背景色3</label>
         </li>
         <li class="pt-1"><a class="link" href="uranus_information.html">天王星の情報</a></li>
@@ -168,7 +164,7 @@
     //レンダラに渡す
     var renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0xefff8dc, 1.0);  //初期 クリーム色
+    renderer.setClearColor(0x202020, 1.0);  //初期 黒色
 
     //bodyへ追加し、表示
     document.body.appendChild(renderer.domElement);

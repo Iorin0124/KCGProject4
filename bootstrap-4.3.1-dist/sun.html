@@ -12,115 +12,111 @@
     <link rel="stylesheet" href="css/drawing.css">
     <link rel="stylesheet" href="css/drawer.min.css">
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous"></script>
-<script src="./js/three.min.js"></script>
-<script src="./js/OrbitControls.js"></script>
-<script src="js/iscroll.js"></script>
-<script src="js/drawer.min.js"></script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+    <script src="./js/three.min.js"></script>
+    <script src="./js/OrbitControls.js"></script>
+    <script src="js/iscroll.js"></script>
+    <script src="js/drawer.min.js"></script>
 
-  <title>太陽</title>
+    <title>太陽</title>
 </head>
 
 <!-- この中にhtmlの中身を書いていく -->
 <body class="drawer drawer--left">
 <!--　ハンバーガーメニュー　-->
 <button type="button" class="drawer-toggle drawer-hamburger margin-02">
-  <span class="sr-only">toggle navigation</span>
-  <span class="drawer-hamburger-icon"></span>
+    <span class="sr-only">toggle navigation</span>
+    <span class="drawer-hamburger-icon"></span>
 </button>
 <nav class="drawer-nav">
-  <ul class="drawer-menu" id="drawer-space">
-    <!--            <li class="pb-1"><input type="radio" id="radio-solar" name="radio_solar"><label for="radio-solar" id="bg-solar">太陽表示切り替え</label></li>-->
-    <li><input type="radio" id="radio-bg-galaxy" name="radio_bg-color" value="#fff8dc"><label for="radio-bg-galaxy"
-                                                                                              id="bg-galaxy">銀河</label>
-    </li>
-    <li><input type="radio" id="radio-bg-color1" name="radio_bg-color" value="#fff8dc" checked="checked"><label
-            for="radio-bg-color1" id="bg-color1">背景色1</label></li>
-    <li><input type="radio" id="radio-bg-color2" name="radio_bg-color" value="#f0f8ff"><label for="radio-bg-color2"
-                                                                                              id="bg-color2">背景色2</label>
-    </li>
-    <li><input type="radio" id="radio-bg-color3" name="radio_bg-color" value="#000000"><label for="radio-bg-color3"
-                                                                                              id="bg-color3">背景色3</label>
-    </li>
-    <li class="pt-1"><a class="link" href="sun_information.html">太陽の情報</a></li>
-    <li><a class="link" href="planetList.html">太陽系惑星一覧</a></li>
-    <li><a class="link" href="index.html">Top page</a></li>
-  </ul>
-  <h6>
-    Copyrights<br>&ensp;&ensp;Celestial Body In The Palm Inc.<br>
-    All Rights Reserved.
-  </h6>
+    <ul class="drawer-menu" id="drawer-space">
+        <li><input type="radio" id="radio-bg-color1" name="radio_bg-color" value="#fff8dc"><label for="radio-bg-color1"
+                                                                                                  id="bg-color1">背景色1</label>
+        </li>
+        <li><input type="radio" id="radio-bg-color2" name="radio_bg-color" value="#f0f8ff"><label for="radio-bg-color2"
+                                                                                                  id="bg-color2">背景色2</label>
+        </li>
+        <li><input type="radio" id="radio-bg-color3" name="radio_bg-color" value="#202020" checked="checked"><label
+                for="radio-bg-color3" id="bg-color3">背景色3</label></li>
+        <li class="pt-1"><a class="link" href="sun_information.html">太陽の情報</a></li>
+        <li><a class="link" href="planetList.html">太陽系惑星一覧</a></li>
+        <li><a class="link" href="index.html">Top page</a></li>
+    </ul>
+    <h6>
+        Copyrights<br>&ensp;&ensp;Celestial Body In The Palm Inc.<br>
+        All Rights Reserved.
+    </h6>
 </nav>
 <!--　ハンバーガーメニューここまで　-->
 <!--　ヘッダー　ナビゲーションバー　-->
 <div class="navcol h-8">
-  <div class="container-fluid">
-    <div class="container-fluid centering" id="navSpace">
-      <div class="row">
-        <div class="col-md-2 navcol"></div>
-        <div class="col-md-8 navcol">
-          <div class="text-center">
-            <a href="index.html" class="">
-              <img class="w-50" id="logo" src="img/logo.png" alt="手のひらに天体儀">
-            </a>
-          </div>
+    <div class="container-fluid">
+        <div class="container-fluid centering" id="navSpace">
+            <div class="row">
+                <div class="col-md-2 navcol"></div>
+                <div class="col-md-8 navcol">
+                    <div class="text-center">
+                        <a href="index.html" class="">
+                            <img class="w-50" id="logo" src="img/logo.png" alt="手のひらに天体儀">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-2 navcol"></div>
+            </div>
         </div>
-        <div class="col-md-2 navcol"></div>
-      </div>
     </div>
-  </div>
 </div>
 <!--　ヘッダーここまで　-->
 
 <script type="text/javascript">
-  /* ここから各コンポーネントの挙動 */
-  //　ハンバーガーメニュー
-  $(document).ready(function () {
-    $(".drawer").drawer();
-  });
-  // ハンバーガーメニューここまで
-
-  var flg = false;
-  // 背景色が変更された時の挙動
-  $(function () {
-    $('input[name="radio_bg-color"]:radio').change(function () {
-      var radio_color = $(this).val();
-      renderer.setClearColor(radio_color, 1.0);  //変更された背景色
+    /* ここから各コンポーネントの挙動 */
+    //　ハンバーガーメニュー
+    $(document).ready(function () {
+        $(".drawer").drawer();
     });
-  });
-  //背景色に関する項目ここまで
+    // ハンバーガーメニューここまで
+
+    var flg = false;
+    // 背景色が変更された時の挙動
+    $(function () {
+        $('input[name="radio_bg-color"]:radio').change(function () {
+            var radio_color = $(this).val();
+            renderer.setClearColor(radio_color, 1.0);  //変更された背景色
+        });
+    });
+    //背景色に関する項目ここまで
 
 
-  /* ここからスマホ挙動の調整 */
-  // スクロールの改善
-  // "passive" が使えるかどうかを検出
-  var passiveSupported = false;
-  try {
-    document.addEventListener("test", null, Object.defineProperty({}, "passive", {
-      get: function () {
-        passiveSupported = true;
-      }
-    }));
-  } catch (err) {
-  }
-  // リスナーを登録
-  document.addEventListener("touchmove", function listener(e) {
-    /* do something */
-    e.preventDefault();
-  }, passiveSupported ? {passive: false} : false);
-  // スマホ画面での挙動調整ここまで
+    /* ここからスマホ挙動の調整 */
+    // スクロールの改善
+    // "passive" が使えるかどうかを検出
+    var passiveSupported = false;
+    try {
+        document.addEventListener("test", null, Object.defineProperty({}, "passive", {
+            get: function () {
+                passiveSupported = true;
+            }
+        }));
+    } catch (err) {
+    }
+    // リスナーを登録
+    document.addEventListener("touchmove", function listener(e) {
+        /* do something */
+        e.preventDefault();
+    }, passiveSupported ? {passive: false} : false);
+    // スマホ画面での挙動調整ここまで
 
-  /* ここからWebGLの処理を記述 */
+    /* ここからWebGLの処理を記述 */
     //シーンを作成
     var scene = new THREE.Scene();
 
@@ -150,7 +146,7 @@
     scene.add(mesh);
     //ここまでが3Dモデル生成のコード　生成物により変更
 
-	//メッシュの更新を許可
+    //メッシュの更新を許可
     mesh.needsUpdate = true;
 
     // 平行光源
@@ -166,29 +162,29 @@
     //レンダラに渡す
     var renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0xefff8dc, 1.0);  //初期 クリーム色
+    renderer.setClearColor(0x202020, 1.0);  //初期 黒色
 
     //bodyへ追加し、表示
     document.body.appendChild(renderer.domElement);
     //console.log(renderer.domElement);
     // 毎フレーム実行 (アニメーションさせる)
     var animate = function () {
-      requestAnimationFrame(animate);
+        requestAnimationFrame(animate);
 
-      // カメラを操作する
-      //常に原点を見つめる
-      camera.lookAt(new THREE.Vector3(0, 0, 0));
-      renderer.render(scene, camera);
-	  
-	  if(flg){
-			var quaternion = mesh.quaternion;
-			
-			var target = new THREE.Quaternion();
-			var axis = new THREE.Vector3(0, 1, 0).normalize();
-			target.setFromAxisAngle(axis, Math.PI/2500);
-			
-			quaternion.multiply(target);
-			}
+        // カメラを操作する
+        //常に原点を見つめる
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
+        renderer.render(scene, camera);
+
+        if (flg) {
+            var quaternion = mesh.quaternion;
+
+            var target = new THREE.Quaternion();
+            var axis = new THREE.Vector3(0, 1, 0).normalize();
+            target.setFromAxisAngle(axis, Math.PI / 2500);
+
+            quaternion.multiply(target);
+        }
     };
 
     animate();
@@ -214,58 +210,58 @@
     }
 
     //画面サイズ変更に関する項目ここまで
-	
-	var onmousedown = function(e) {
-		var rect = e.target.getBoundingClientRect();
-		//画面上のマウス位置
-		var mouseX = e.clientX - rect.left;
-		var mouseY = e.clientY - rect.top;
-		
-		//canvas内のマウス位置
-		mouseX = (mouseX/window.innerWidth) *2 - 1;
-		mouseY =-(mouseY/window.innerHeight)*2 + 1;
-		
-		//マウスのベクトル
-		var pos = new THREE.Vector3(mouseX, mouseY, 1);
-		pos.unproject(camera);
-		
-		//マウスの位置上にレイを生成
-		var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
-		var obj = ray.intersectObjects([mesh]);
-		
-		//０より大きい場合、オブジェクトに交差する
-		if (obj.length > 0) {
-			flg = flg ? false : true;
-			console.log("nyaaaa");
-		}
-	};
-	
-	var ontouchend = function(e) {
-		var rect = e.target.getBoundingClientRect();
-		//画面上のマウス位置
-		var mouseX = e.clientX - rect.left;
-		var mouseY = e.clientY - rect.top;
-		
-		//canvas内のマウス位置
-		mouseX = (mouseX/window.innerWidth) *2 - 1;
-		mouseY =-(mouseY/window.innerHeight)*2 + 1;
-		
-		//マウスのベクトル
-		var pos = new THREE.Vector3(mouseX, mouseY, 1);
-		pos.unproject(camera);
-		
-		//マウスの位置上にレイを生成
-		var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
-		var obj = ray.intersectObjects([mesh]);
-		
-		//０より大きい場合、オブジェクトに交差する
-		if (obj.length > 0) {
-			flg = flg ? false : true;
-			console.log("nyaaaa");
-		}
-		
-		
-};
+
+    var onmousedown = function (e) {
+        var rect = e.target.getBoundingClientRect();
+        //画面上のマウス位置
+        var mouseX = e.clientX - rect.left;
+        var mouseY = e.clientY - rect.top;
+
+        //canvas内のマウス位置
+        mouseX = (mouseX / window.innerWidth) * 2 - 1;
+        mouseY = -(mouseY / window.innerHeight) * 2 + 1;
+
+        //マウスのベクトル
+        var pos = new THREE.Vector3(mouseX, mouseY, 1);
+        pos.unproject(camera);
+
+        //マウスの位置上にレイを生成
+        var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
+        var obj = ray.intersectObjects([mesh]);
+
+        //０より大きい場合、オブジェクトに交差する
+        if (obj.length > 0) {
+            flg = flg ? false : true;
+            console.log("nyaaaa");
+        }
+    };
+
+    var ontouchend = function (e) {
+        var rect = e.target.getBoundingClientRect();
+        //画面上のマウス位置
+        var mouseX = e.clientX - rect.left;
+        var mouseY = e.clientY - rect.top;
+
+        //canvas内のマウス位置
+        mouseX = (mouseX / window.innerWidth) * 2 - 1;
+        mouseY = -(mouseY / window.innerHeight) * 2 + 1;
+
+        //マウスのベクトル
+        var pos = new THREE.Vector3(mouseX, mouseY, 1);
+        pos.unproject(camera);
+
+        //マウスの位置上にレイを生成
+        var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
+        var obj = ray.intersectObjects([mesh]);
+
+        //０より大きい場合、オブジェクトに交差する
+        if (obj.length > 0) {
+            flg = flg ? false : true;
+            console.log("nyaaaa");
+        }
+
+
+    };
 </script>
 
 

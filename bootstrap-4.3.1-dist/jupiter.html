@@ -40,18 +40,14 @@
 </button>
 <nav class="drawer-nav">
     <ul class="drawer-menu" id="drawer-space">
-        <!--            <li class="pb-1"><input type="radio" id="radio-solar" name="radio_solar"><label for="radio-solar" id="bg-solar">太陽表示切り替え</label></li>-->
-        <li><input type="radio" id="radio-bg-galaxy" name="radio_bg-color" value="#fff8dc"><label for="radio-bg-galaxy"
-                                                                                                  id="bg-galaxy">銀河</label>
+        <li><input type="radio" id="radio-bg-color1" name="radio_bg-color" value="#fff8dc"><label for="radio-bg-color1"
+                                                                                                  id="bg-color1">背景色1</label>
         </li>
-        <li><input type="radio" id="radio-bg-color1" name="radio_bg-color" value="#fff8dc" checked="checked"><label
-                for="radio-bg-color1" id="bg-color1">背景色1</label></li>
         <li><input type="radio" id="radio-bg-color2" name="radio_bg-color" value="#f0f8ff"><label for="radio-bg-color2"
                                                                                                   id="bg-color2">背景色2</label>
         </li>
-        <li><input type="radio" id="radio-bg-color3" name="radio_bg-color" value="#000000"><label for="radio-bg-color3"
-                                                                                                  id="bg-color3">背景色3</label>
-        </li>
+        <li><input type="radio" id="radio-bg-color3" name="radio_bg-color" value="#202020" checked="checked"><label
+                for="radio-bg-color3" id="bg-color3">背景色3</label></li>
         <li class="pt-1"><a class="link" href="mars_information.html">木星の情報</a></li>
         <li><a class="link" href="planetList.html">太陽系惑星一覧</a></li>
         <li><a class="link" href="index.html">Top page</a></li>
@@ -91,7 +87,7 @@
     });
     // ハンバーガーメニューここまで
 
-	var flg =false;
+    var flg = false;
     // 背景色が変更された時の挙動
     $(function () {
         $('input[name="radio_bg-color"]:radio').change(function () {
@@ -144,7 +140,7 @@
     const mesh = new THREE.Mesh(geometry, material);
     // 傾きを追加してみる
     // オブジェクト名.rotation.set(x軸,y軸,z軸);
-    mesh.rotation.set((-3.13*Math.PI/180),0,(-3.13*Math.PI/180));
+    mesh.rotation.set((-3.13 * Math.PI / 180), 0, (-3.13 * Math.PI / 180));
 
     //表示位置の設定
     mesh.position.set(0, 0, 0);
@@ -152,9 +148,9 @@
     scene.add(mesh);
     //ここまでが3Dモデル生成のコード　生成物により変更
 
-	//メッシュの更新を許可
+    //メッシュの更新を許可
     mesh.needsUpdate = true;
-	
+
     // // 平行光源
     // const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 0.5);
     // directionalLight.position.set(0, 0, 1);
@@ -168,7 +164,7 @@
     //レンダラに渡す
     var renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0xefff8dc, 1.0);  //初期 クリーム色
+    renderer.setClearColor(0x202020, 1.0);  //初期 黒色
 
     //bodyへ追加し、表示
     document.body.appendChild(renderer.domElement);
@@ -176,27 +172,27 @@
 
     // 毎フレーム実行 (アニメーションさせる)
     var animate = function () {
-      requestAnimationFrame(animate);
+        requestAnimationFrame(animate);
 
-      // カメラを操作する
-      //常に原点を見つめる
-      camera.lookAt(new THREE.Vector3(0, 0, 0));
+        // カメラを操作する
+        //常に原点を見つめる
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
 
         // 回転行列を適用させる…？
         //   mesh.rotation.x -= 0.005;
         /*mesh.rotation.x += 0.025;
         mesh.rotation.z += 0.025;
         renderer.render(scene, camera);*/
-		renderer.render(scene, camera);
-		if(flg){
-			var quaternion = mesh.quaternion;
-			
-			var target = new THREE.Quaternion();
-			var axis = new THREE.Vector3(0, 1, 0).normalize();
-			target.setFromAxisAngle(axis, Math.PI/250);
-			
-			quaternion.multiply(target);
-			}
+        renderer.render(scene, camera);
+        if (flg) {
+            var quaternion = mesh.quaternion;
+
+            var target = new THREE.Quaternion();
+            var axis = new THREE.Vector3(0, 1, 0).normalize();
+            target.setFromAxisAngle(axis, Math.PI / 250);
+
+            quaternion.multiply(target);
+        }
     };
     animate();
     //３Dモデル作成,描画に関する項目ここまで
@@ -223,58 +219,58 @@
     }
 
     //画面サイズ変更に関する項目ここまで
-	
-	    var onmousedown = function(e) {
-    var rect = e.target.getBoundingClientRect();
-    //画面上のマウス位置
-    var mouseX = e.clientX - rect.left;
-    var mouseY = e.clientY - rect.top;
-    
-    //canvas内のマウス位置
-    mouseX = (mouseX/window.innerWidth) *2 - 1;
-    mouseY =-(mouseY/window.innerHeight)*2 + 1;
-    
-    //マウスのベクトル
-    var pos = new THREE.Vector3(mouseX, mouseY, 1);
-    pos.unproject(camera);
-    
-    //マウスの位置上にレイを生成
-    var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
-    var obj = ray.intersectObjects([mesh]);
-    
-    //０より大きい場合、オブジェクトに交差する
-    if (obj.length > 0) {
-        flg = flg ? false : true;
-        console.log("nyaaaa");
-    }
-};
 
-var ontouchend = function(e) {
-		var rect = e.target.getBoundingClientRect();
-		//画面上のマウス位置
-		var mouseX = e.clientX - rect.left;
-		var mouseY = e.clientY - rect.top;
-		
-		//canvas内のマウス位置
-		mouseX = (mouseX/window.innerWidth) *2 - 1;
-		mouseY =-(mouseY/window.innerHeight)*2 + 1;
-		
-		//マウスのベクトル
-		var pos = new THREE.Vector3(mouseX, mouseY, 1);
-		pos.unproject(camera);
-		
-		//マウスの位置上にレイを生成
-		var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
-		var obj = ray.intersectObjects([mesh]);
-		
-		//０より大きい場合、オブジェクトに交差する
-		if (obj.length > 0) {
-			flg = flg ? false : true;
-			console.log("nyaaaa");
-		}
-		
-		
-};
+    var onmousedown = function (e) {
+        var rect = e.target.getBoundingClientRect();
+        //画面上のマウス位置
+        var mouseX = e.clientX - rect.left;
+        var mouseY = e.clientY - rect.top;
+
+        //canvas内のマウス位置
+        mouseX = (mouseX / window.innerWidth) * 2 - 1;
+        mouseY = -(mouseY / window.innerHeight) * 2 + 1;
+
+        //マウスのベクトル
+        var pos = new THREE.Vector3(mouseX, mouseY, 1);
+        pos.unproject(camera);
+
+        //マウスの位置上にレイを生成
+        var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
+        var obj = ray.intersectObjects([mesh]);
+
+        //０より大きい場合、オブジェクトに交差する
+        if (obj.length > 0) {
+            flg = flg ? false : true;
+            console.log("nyaaaa");
+        }
+    };
+
+    var ontouchend = function (e) {
+        var rect = e.target.getBoundingClientRect();
+        //画面上のマウス位置
+        var mouseX = e.clientX - rect.left;
+        var mouseY = e.clientY - rect.top;
+
+        //canvas内のマウス位置
+        mouseX = (mouseX / window.innerWidth) * 2 - 1;
+        mouseY = -(mouseY / window.innerHeight) * 2 + 1;
+
+        //マウスのベクトル
+        var pos = new THREE.Vector3(mouseX, mouseY, 1);
+        pos.unproject(camera);
+
+        //マウスの位置上にレイを生成
+        var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
+        var obj = ray.intersectObjects([mesh]);
+
+        //０より大きい場合、オブジェクトに交差する
+        if (obj.length > 0) {
+            flg = flg ? false : true;
+            console.log("nyaaaa");
+        }
+
+
+    };
 
 </script>
 

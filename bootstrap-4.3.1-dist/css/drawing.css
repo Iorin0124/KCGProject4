@@ -30,7 +30,7 @@ body {
 }
 
 .bg-black {
-    background-color: #000000;
+    background-color: #202020;
 }
 
 /* ハンバーガーメニュー内のラジオボタン */
@@ -65,7 +65,7 @@ li input[type=radio] {
 /* ハンバーガーメニュー内の背景色変更見本(黒色) */
 #bg-color3 {
     color: white;
-    background-color: #000000;
+    background-color: #202020;
 }
 
 /*　コピーライト　*/
