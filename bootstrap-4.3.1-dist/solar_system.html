@@ -82,6 +82,16 @@
 
 
 <script type="text/javascript">
+
+	var planetPosX = [0,35,69.4,98,129.2,167,205.4,205.4,246.5,288.1];
+	var planetRev = [0,0,0,0,0,0,0,0,0,0];
+	var revSpeed = [0,1.81,1.63,1.53,1.4,1.02,0.83,0.83,0.61,0.47];
+	var planetRot = [2000,1500,2500,500,500,250,280,280,400,1000]
+	var quaternion = new Array(10);
+	var target = new Array(10);
+	var axis = new Array(10);
+
+
   /* ここから各コンポーネントの挙動 */
   //　ハンバーガーメニュー
   $(document).ready(function () {
@@ -329,7 +339,15 @@
 	flg[6] = flg[7]==1 ? flg[6]=1 : flg[6]=0;
     
 	for(var i=1 ; flg.length>=i ; i++)if(flg[i]==1)PlanetAnimate(i);
+	if(flg[0] == 1){
+		quaternion[0] = mesh[0].quaternion;
 	
+		target[0] = new THREE.Quaternion();
+		axis[0] = new THREE.Vector3(0, 1, 0).normalize();
+		target[0].setFromAxisAngle(axis[0], -Math.PI/planetRot[0]);
+		
+		quaternion[0].multiply(target[0]);
+	}
 
   };
   animate();
@@ -416,16 +434,9 @@ var ontouchend = function(e) {
 		console.log(mesh[7].position.x);
 };
 
-var planetPosX = [0,35,69.4,98,129.2,167,205.4,205.4,246.5,288.1];
-var planetRev = [0,0,0,0,0,0,0,0,0,0];
-var planetRot = [2500,1500,2500,500,500,250,280,280,400,1000]
-var quaternion = new Array(10);
-var target = new Array(10);
-var axis = new Array(10);
-
 function PlanetAnimate(num){
 		//物体の移動
-		planetRev[num] -= 0.3;
+		planetRev[num] -= revSpeed[num];
 		mesh[num].position.x = Math.cos(THREE.Math.degToRad(planetRev[num]))*planetPosX[num];
 		mesh[num].position.z = Math.sin(THREE.Math.degToRad(planetRev[num]))*planetPosX[num];
 		
@@ -438,10 +449,11 @@ function PlanetAnimate(num){
 		}
 		target[num].setFromAxisAngle(axis[num], Math.PI/planetRot[num]);	
 		quaternion[num].multiply(target[num]);
-		
-		if(mesh[num].position.x == planetPosX[num]){
+		console.log(mesh[num].position.x - planetPosX[num]);
+		if((mesh[num].position.x - planetPosX[num])<0.005&&(mesh[num].position.x - planetPosX[num])>-0.005){
 			flg[num] = 0;
 			planetRev[num] = 0;
+			mesh[num].position.x = planetPosX[num];
 		}
 }
 
