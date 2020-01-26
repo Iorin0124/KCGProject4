@@ -82,6 +82,16 @@
 
 
 <script type="text/javascript">
+
+	var planetPosX = [0,35,69.4,98,129.2,167,205.4,205.4,246.5,288.1];
+	var planetRev = [0,0,0,0,0,0,0,0,0,0];
+	var revSpeed = [0,1.81,1.63,1.53,1.4,1.02,0.83,0.83,0.61,0.47];
+	var planetRot = [2000,1500,2500,500,500,250,280,280,400,1000]
+	var quaternion = new Array(10);
+	var target = new Array(10);
+	var axis = new Array(10);
+
+
   /* ここから各コンポーネントの挙動 */
   //　ハンバーガーメニュー
   $(document).ready(function () {
@@ -131,6 +141,7 @@
   const controls = new THREE.OrbitControls(camera);
 
   //ここから3Dモデル生成のコード
+  mesh = [];
   //物体1(太陽)
   //メッシュを作成（ジオメトリとマテリアルを元にメッシュを作成）
   const geometry_0 = new THREE.SphereGeometry(15, 50, 50);
@@ -145,7 +156,7 @@
   mesh_0.position.set(0, 0, 0);
   //シーンに追加
   scene.add(mesh_0);
-
+  
   //物体2(水星)
   //メッシュを作成（ジオメトリとマテリアルを元にメッシュを作成）
   const geometry_1 = new THREE.SphereGeometry(9, 50, 50);
@@ -287,7 +298,11 @@
   mesh_9.position.set(288.1, 0, 0);
   //シーンに追加
   scene.add(mesh_9);
-
+  
+  mesh.push(mesh_0,mesh_1,mesh_2,mesh_3,mesh_4,mesh_5,mesh_6,mesh_7,mesh_8,mesh_9);
+  flg = [0,0,0,0,0,0,0,0,0,0];
+  //メッシュの更新を許可
+  //mesh[1].needsUpdate = true;
 
   //ここまでが3Dモデル生成のコード　生成物により変更
 
@@ -317,10 +332,22 @@
     // カメラを操作する
     //常に原点を見つめる
     camera.lookAt(new THREE.Vector3(0, 0, 0));
-
-
-
     renderer.render(scene, camera);
+	
+	//土星の輪
+	flg[7] = flg[6]==1 ? flg[7]=1 : flg[7]=0;
+	flg[6] = flg[7]==1 ? flg[6]=1 : flg[6]=0;
+    
+	for(var i=1 ; flg.length>=i ; i++)if(flg[i]==1)PlanetAnimate(i);
+	if(flg[0] == 1){
+		quaternion[0] = mesh[0].quaternion;
+	
+		target[0] = new THREE.Quaternion();
+		axis[0] = new THREE.Vector3(0, 1, 0).normalize();
+		target[0].setFromAxisAngle(axis[0], -Math.PI/planetRot[0]);
+		
+		quaternion[0].multiply(target[0]);
+	}
 
   };
   animate();
@@ -347,6 +374,88 @@
     camera.updateProjectionMatrix();
   }
   //画面サイズ変更に関する項目ここまで
+  
+  var onmousedown = function(e) {
+		var rect = e.target.getBoundingClientRect();
+		//画面上のマウス位置
+		var mouseX = e.clientX - rect.left;
+		var mouseY = e.clientY - rect.top;
+		
+		//canvas内のマウス位置
+		mouseX = (mouseX/window.innerWidth) *2 - 1;
+		mouseY =-(mouseY/window.innerHeight)*2 + 1;
+		
+		//マウスのベクトル
+		var pos = new THREE.Vector3(mouseX, mouseY, 1);
+		pos.unproject(camera);
+		console.log(mesh.length);
+		//マウスの位置上にレイを生成
+		var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
+		for(var i=0 ; mesh.length>=i ; i++){
+			var obj = ray.intersectObjects([mesh[i]]);
+			//０より大きい場合、オブジェクトに交差する
+			if (obj.length > 0) {
+				console.log(i+"nyaaaa");
+				flg[i] = flg[i]==0 ? flg[i] = 1 : flg[i] = 0;
+				break;
+			}
+			
+		}
+		console.log(flg);
+		console.log(mesh[7].position.x);
+};
+var ontouchend = function(e) {
+		var rect = e.target.getBoundingClientRect();
+		//画面上のマウス位置
+		var mouseX = e.clientX - rect.left;
+		var mouseY = e.clientY - rect.top;
+		
+		//canvas内のマウス位置
+		mouseX = (mouseX/window.innerWidth) *2 - 1;
+		mouseY =-(mouseY/window.innerHeight)*2 + 1;
+		
+		//マウスのベクトル
+		var pos = new THREE.Vector3(mouseX, mouseY, 1);
+		pos.unproject(camera);
+		console.log(mesh.length);
+		//マウスの位置上にレイを生成
+		var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
+		for(var i=0 ; mesh.length>=i ; i++){
+			var obj = ray.intersectObjects([mesh[i]]);
+			//０より大きい場合、オブジェクトに交差する
+			if (obj.length > 0) {
+				console.log(i+"nyaaaa");
+				flg[i] = flg[i]==0 ? flg[i] = 1 : flg[i] = 0;
+				break;
+			}
+			
+		}
+		console.log(flg);
+		console.log(mesh[7].position.x);
+};
+
+function PlanetAnimate(num){
+		//物体の移動
+		planetRev[num] -= revSpeed[num];
+		mesh[num].position.x = Math.cos(THREE.Math.degToRad(planetRev[num]))*planetPosX[num];
+		mesh[num].position.z = Math.sin(THREE.Math.degToRad(planetRev[num]))*planetPosX[num];
+		
+		quaternion[num] = mesh[num].quaternion;	
+		target[num] = new THREE.Quaternion();
+		if(num!=7){
+			axis[num] = new THREE.Vector3(0, 1, 0).normalize();
+		}else{
+			axis[num] = new THREE.Vector3(0, 0, 1).normalize();
+		}
+		target[num].setFromAxisAngle(axis[num], Math.PI/planetRot[num]);	
+		quaternion[num].multiply(target[num]);
+		console.log(mesh[num].position.x - planetPosX[num]);
+		if((mesh[num].position.x - planetPosX[num])<0.005&&(mesh[num].position.x - planetPosX[num])>-0.005){
+			flg[num] = 0;
+			planetRev[num] = 0;
+			mesh[num].position.x = planetPosX[num];
+		}
+}
 
 </script>
 </body>
