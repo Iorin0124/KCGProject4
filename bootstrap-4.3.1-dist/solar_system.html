@@ -135,9 +135,9 @@
 
   //カメラを作成
   var camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 10000);
-  camera.position.z = 535;
+  camera.position.set(0, 160, 535);
 
-  //カメラコントローラーを作成
+    //カメラコントローラーを作成
   const controls = new THREE.OrbitControls(camera);
 
   //ここから3Dモデル生成のコード
