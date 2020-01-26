@@ -40,7 +40,8 @@
 </button>
 <nav class="drawer-nav">
     <ul class="drawer-menu" id="drawer-space">
-        <li><input type="radio" id="radio-bg-color1" name="radio_bg-color" value="#fff8dc"><label for="radio-bg-color1"
+        <li><span class="description" type="button" id="description">操作説明</span></li>
+        <li class="pt-1"><input type="radio" id="radio-bg-color1" name="radio_bg-color" value="#fff8dc"><label for="radio-bg-color1"
                                                                                                   id="bg-color1">背景色1</label>
         </li>
         <li><input type="radio" id="radio-bg-color2" name="radio_bg-color" value="#f0f8ff"><label for="radio-bg-color2"
@@ -80,6 +81,21 @@
 
 <script type="text/javascript">
     /* ここから各コンポーネントの挙動 */
+
+    //操作説明アラート
+    //初回動作
+    description();
+
+    function description(){
+        window.alert("【操作説明】\n・クリックorタップで自転します。\n・ドラッグor1本指スクロールで回転します。\n・その他メニューは左上の3本線のアイコンからどうぞ");
+    }
+
+    $(function(){
+       $('#description').on('click', function () {
+           description();
+       });
+    });
+
     //　ハンバーガーメニュー
     $(document).ready(function () {
         $(".drawer").drawer();

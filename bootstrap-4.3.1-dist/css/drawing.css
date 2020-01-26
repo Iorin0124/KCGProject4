@@ -39,7 +39,7 @@ li input[type=radio] {
 }
 
 /* ハンバーガーメニュー内のコンテンツ */
-#drawer-space label, a.link {
+#drawer-space label, a.link, span.description {
     display: block;
     margin: 5px;
     padding-left: 5px;
