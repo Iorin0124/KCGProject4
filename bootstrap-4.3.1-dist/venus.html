@@ -167,11 +167,6 @@
 
 	//メッシュの更新を許可
     mesh.needsUpdate = true;
-    // // 平行光源
-    // const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 0.5);
-    // directionalLight.position.set(0, 0, 1);
-    // //シーンに追加
-    // scene.add(directionalLight);
 
     //環境光
     const light = new THREE.AmbientLight(0xFFFFFF, 2.3);
@@ -184,7 +179,6 @@
 
     //bodyへ追加し、表示
     document.body.appendChild(renderer.domElement);
-    //console.log(renderer.domElement);
 
     // 毎フレーム実行 (アニメーションさせる)
     var animate = function () {
@@ -194,14 +188,9 @@
         //常に原点を見つめる
         camera.lookAt(new THREE.Vector3(0, 0, 0));
 
-
-        // 回転行列を適用させる…？
-        //   mesh.rotation.x -= 0.005;
-        //mesh.rotation.x += 0.003;
-        //mesh.rotation.z += 0.003;
-        //renderer.render(scene, camera);
-		
 		renderer.render(scene, camera);
+
+		//自転のアニメーション
 		if(flg){
 			var quaternion = mesh.quaternion;
 			
@@ -238,32 +227,8 @@
 
     //画面サイズ変更に関する項目ここまで
 	
-	    var onmousedown = function(e) {
-    var rect = e.target.getBoundingClientRect();
-    //画面上のマウス位置
-    var mouseX = e.clientX - rect.left;
-    var mouseY = e.clientY - rect.top;
-    
-    //canvas内のマウス位置
-    mouseX = (mouseX/window.innerWidth) *2 - 1;
-    mouseY =-(mouseY/window.innerHeight)*2 + 1;
-    
-    //マウスのベクトル
-    var pos = new THREE.Vector3(mouseX, mouseY, 1);
-    pos.unproject(camera);
-    
-    //マウスの位置上にレイを生成
-    var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
-    var obj = ray.intersectObjects([mesh]);
-    
-    //０より大きい場合、オブジェクトに交差する
-    if (obj.length > 0) {
-        flg = flg ? false : true;
-        console.log("nyaaaa");
-    }
-};
-
-var ontouchend = function(e) {
+	//PC上でクリックを検知する
+	var onmousedown = function(e) {
 		var rect = e.target.getBoundingClientRect();
 		//画面上のマウス位置
 		var mouseX = e.clientX - rect.left;
@@ -277,18 +242,40 @@ var ontouchend = function(e) {
 		var pos = new THREE.Vector3(mouseX, mouseY, 1);
 		pos.unproject(camera);
 		
-		//マウスの位置上にレイを生成
+		//ベクトルに合わせてレイを生成
 		var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
 		var obj = ray.intersectObjects([mesh]);
 		
 		//０より大きい場合、オブジェクトに交差する
 		if (obj.length > 0) {
 			flg = flg ? false : true;
-			console.log("nyaaaa");
 		}
+	};
+
+	//スマホ上でcanvas上のタップを検知する
+	var ontouchend = function(e) {
+		var rect = e.target.getBoundingClientRect();
+		//画面上のタップ位置
+		var mouseX = e.clientX - rect.left;
+		var mouseY = e.clientY - rect.top;
 		
+		//canvas内のタップ位置
+		mouseX = (mouseX/window.innerWidth) *2 - 1;
+		mouseY =-(mouseY/window.innerHeight)*2 + 1;
 		
-};
+		//タップ位置のベクトル
+		var pos = new THREE.Vector3(mouseX, mouseY, 1);
+		pos.unproject(camera);
+		
+		//ベクトルに合わせてレイを生成
+		var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
+		var obj = ray.intersectObjects([mesh]);
+		
+		//０より大きい場合、オブジェクトに交差する
+		if (obj.length > 0) {
+			flg = flg ? false : true;
+		}
+	};
 
 </script>
 

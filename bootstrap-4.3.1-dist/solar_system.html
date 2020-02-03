@@ -85,9 +85,13 @@
 
 <script type="text/javascript">
 
+	//惑星毎の初期位置
 	var planetPosX = [0,35,69.4,98,129.2,167,205.4,205.4,246.5,288.1];
+	//惑星毎の移動位置
 	var planetRev = [0,0,0,0,0,0,0,0,0,0];
+	//惑星毎の公転の速度
 	var revSpeed = [0,1.81,1.63,1.53,1.4,1.02,0.83,0.83,0.61,0.47];
+	//惑星毎の自転の速度
 	var planetRot = [2000,1500,2500,500,500,250,280,280,400,1000]
 	var quaternion = new Array(10);
 	var target = new Array(10);
@@ -317,17 +321,10 @@
   scene.add(mesh_9);
   
   mesh.push(mesh_0,mesh_1,mesh_2,mesh_3,mesh_4,mesh_5,mesh_6,mesh_7,mesh_8,mesh_9);
+  //惑星毎のアニメーション判定
   flg = [0,0,0,0,0,0,0,0,0,0];
-  //メッシュの更新を許可
-  //mesh[1].needsUpdate = true;
-
+  
   //ここまでが3Dモデル生成のコード　生成物により変更
-
-  // // 平行光源
-  // const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 0.5);
-  // directionalLight.position.set(0, 0, 1);
-  // //シーンに追加
-  // scene.add(directionalLight);
 
   //環境光
   const light = new THREE.AmbientLight(0xFFFFFF, 2.3);
@@ -351,11 +348,14 @@
     camera.lookAt(new THREE.Vector3(0, 0, 0));
     renderer.render(scene, camera);
 	
-	//土星の輪
+	//土星と土星の輪の判定を統一する
 	flg[7] = flg[6]==1 ? flg[7]=1 : flg[7]=0;
 	flg[6] = flg[7]==1 ? flg[6]=1 : flg[6]=0;
     
+	//太陽以外がクリックされた際に自転と公転のアニメーションをする
 	for(var i=1 ; flg.length>=i ; i++)if(flg[i]==1)PlanetAnimate(i);
+	
+	//太陽がクリックされた際に自転アニメーションをする
 	if(flg[0] == 1){
 		quaternion[0] = mesh[0].quaternion;
 	
@@ -392,6 +392,7 @@
   }
   //画面サイズ変更に関する項目ここまで
   
+  //PC上でクリックを検知する
   var onmousedown = function(e) {
 		var rect = e.target.getBoundingClientRect();
 		//画面上のマウス位置
@@ -405,23 +406,21 @@
 		//マウスのベクトル
 		var pos = new THREE.Vector3(mouseX, mouseY, 1);
 		pos.unproject(camera);
-		console.log(mesh.length);
-		//マウスの位置上にレイを生成
+		//ベクトルに合わせてレイを生成
 		var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
 		for(var i=0 ; mesh.length>=i ; i++){
 			var obj = ray.intersectObjects([mesh[i]]);
 			//０より大きい場合、オブジェクトに交差する
 			if (obj.length > 0) {
-				console.log(i+"nyaaaa");
 				flg[i] = flg[i]==0 ? flg[i] = 1 : flg[i] = 0;
 				break;
 			}
 			
 		}
-		console.log(flg);
-		console.log(mesh[7].position.x);
-};
-var ontouchend = function(e) {
+	};
+	
+	//スマホ上でcanvas上のタップを検知する
+	var ontouchend = function(e) {
 		var rect = e.target.getBoundingClientRect();
 		//画面上のマウス位置
 		var mouseX = e.clientX - rect.left;
@@ -434,45 +433,46 @@ var ontouchend = function(e) {
 		//マウスのベクトル
 		var pos = new THREE.Vector3(mouseX, mouseY, 1);
 		pos.unproject(camera);
-		console.log(mesh.length);
-		//マウスの位置上にレイを生成
+		//ベクトルに合わせてレイを生成
 		var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
 		for(var i=0 ; mesh.length>=i ; i++){
 			var obj = ray.intersectObjects([mesh[i]]);
 			//０より大きい場合、オブジェクトに交差する
 			if (obj.length > 0) {
-				console.log(i+"nyaaaa");
 				flg[i] = flg[i]==0 ? flg[i] = 1 : flg[i] = 0;
 				break;
 			}
 			
 		}
-		console.log(flg);
-		console.log(mesh[7].position.x);
-};
+	};
 
-function PlanetAnimate(num){
-		//物体の移動
+	//惑星の自転と公転のアニメーション
+	function PlanetAnimate(num){
+		//惑星毎に指定した速度で公転を行う
 		planetRev[num] -= revSpeed[num];
 		mesh[num].position.x = Math.cos(THREE.Math.degToRad(planetRev[num]))*planetPosX[num];
 		mesh[num].position.z = Math.sin(THREE.Math.degToRad(planetRev[num]))*planetPosX[num];
 		
+		//惑星毎に指定した速度で自転を行う
 		quaternion[num] = mesh[num].quaternion;	
 		target[num] = new THREE.Quaternion();
 		if(num!=7){
+			//土星の輪以外の自転
 			axis[num] = new THREE.Vector3(0, 1, 0).normalize();
 		}else{
+			//土星の輪の自転
 			axis[num] = new THREE.Vector3(0, 0, 1).normalize();
 		}
 		target[num].setFromAxisAngle(axis[num], Math.PI/planetRot[num]);	
 		quaternion[num].multiply(target[num]);
-		console.log(mesh[num].position.x - planetPosX[num]);
+		
+		//1周した惑星の公転を停止する
 		if((mesh[num].position.x - planetPosX[num])<0.005&&(mesh[num].position.x - planetPosX[num])>-0.005){
 			flg[num] = 0;
 			planetRev[num] = 0;
 			mesh[num].position.x = planetPosX[num];
 		}
-}
+	}
 
 </script>
 </body>
