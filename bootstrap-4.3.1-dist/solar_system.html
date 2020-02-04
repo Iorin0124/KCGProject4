@@ -1,479 +1,472 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/index.css">
-  <link rel="stylesheet" href="css/drawing.css">
-  <link rel="stylesheet" href="css/drawer.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/drawing.css">
+    <link rel="stylesheet" href="css/drawer.min.css">
 
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-          integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-          crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-          integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-          crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-          integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-          crossorigin="anonymous"></script>
-  <script src="js/three.min.js"></script>
-  <script src="js/OrbitControls.js"></script>
-  <script src="js/iscroll.js"></script>
-  <script src="js/drawer.min.js"></script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+    <script src="js/three.min.js"></script>
+    <script src="js/OrbitControls.js"></script>
+    <script src="js/iscroll.js"></script>
+    <script src="js/drawer.min.js"></script>
 
-  <title>太陽系</title>
+    <title>太陽系</title>
 </head>
 
 <!-- この中にhtmlの中身を書いていく -->
 <body class="drawer drawer--left">
 <!--　ハンバーガーメニュー　-->
 <button type="button" class="drawer-toggle drawer-hamburger margin-02">
-  <span class="sr-only">toggle navigation</span>
-  <span class="drawer-hamburger-icon"></span>
+    <span class="sr-only">toggle navigation</span>
+    <span class="drawer-hamburger-icon"></span>
 </button>
 <nav class="drawer-nav">
-  <ul class="drawer-menu" id="drawer-space">
-    <li><span class="description" type="button" id="description">操作説明</span></li>
-    <li class="pt-1"><input type="radio" id="radio-bg-color1" name="radio_bg-color" value="#fff8dc"><label for="radio-bg-color1"
-                                                                                                           id="bg-color1">背景色1</label>
-    </li>
-    <li><input type="radio" id="radio-bg-color2" name="radio_bg-color" value="#f0f8ff"><label for="radio-bg-color2"
-                                                                                              id="bg-color2">背景色2</label>
-    </li>
-    <li><input type="radio" id="radio-bg-color3" name="radio_bg-color" value="#202020" checked="checked"><label for="radio-bg-color3"
-                                                                                              id="bg-color3">背景色3</label>
-    </li>
-    <li class="pt-1"><a class="link" href="solar_system_information.html">太陽系の情報</a></li>
-    <li><a class="link" href="planetList.html">太陽系惑星一覧</a></li>
-    <li><a class="link" href="index.html">Top page</a></li>
-    <li class="pt-1">※惑星のサイズ：地球を基準1として、常用対数表示したものを使用</li>
-    <li>※惑星間の距離：各惑星間の距離の常用対数を用いて、見やすくなるように倍率表示したものを使用</li>
-  </ul>
-  <h6>
-    Copyrights<br>&ensp;&ensp;Celestial Body In The Palm Inc.<br>
-    All Rights Reserved.
-  </h6>
+    <ul class="drawer-menu" id="drawer-space">
+        <li><span class="description" type="button" id="description">操作説明</span></li>
+        <li class="pt-1"><input type="radio" id="radio-bg-color1" name="radio_bg-color" value="#fff8dc">
+            <label for="radio-bg-color1" id="bg-color1">背景色1</label>
+        </li>
+        <li><input type="radio" id="radio-bg-color2" name="radio_bg-color" value="#f0f8ff">
+            <label for="radio-bg-color2" id="bg-color2">背景色2</label>
+        </li>
+        <li><input type="radio" id="radio-bg-color3" name="radio_bg-color" value="#202020" checked="checked">
+            <label for="radio-bg-color3" id="bg-color3">背景色3</label>
+        </li>
+        <li class="pt-1"><a class="link" href="solar_system_information.html">太陽系の情報</a></li>
+        <li><a class="link" href="planetList.html">太陽系惑星一覧</a></li>
+        <li><a class="link" href="index.html">Top page</a></li>
+        <li class="pt-1">※惑星のサイズ：地球を基準1として、常用対数表示したものを使用</li>
+        <li>※惑星間の距離：各惑星間の距離の常用対数を用いて、見やすくなるように倍率表示したものを使用</li>
+    </ul>
+    <h6>
+        Copyrights<br>&ensp;&ensp;Celestial Body In The Palm Inc.<br>
+        All Rights Reserved.
+    </h6>
 </nav>
 <!--　ハンバーガーメニューここまで　-->
 <!--　ヘッダー　ナビゲーションバー　-->
 <div class="navcol h-8">
-  <div class="container-fluid">
-    <div class="container-fluid centering" id="navSpace">
-      <div class="row">
-        <div class="col-md-2 navcol"></div>
-        <div class="col-md-8 navcol">
-          <div class="text-center">
-            <a href="index.html" class="">
-              <img class="w-50" id="logo" src="img/logo.png" alt="手のひらに天体儀">
-            </a>
-          </div>
+    <div class="container-fluid">
+        <div class="container-fluid centering" id="navSpace">
+            <div class="row">
+                <div class="col-md-2 navcol"></div>
+                <div class="col-md-8 navcol">
+                    <div class="text-center">
+                        <a href="index.html" class="">
+                            <img class="w-50" id="logo" src="img/logo.png" alt="手のひらに天体儀">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-2 navcol"></div>
+            </div>
         </div>
-        <div class="col-md-2 navcol"></div>
-      </div>
     </div>
-  </div>
 </div>
 <!--　ヘッダーここまで　-->
 
 
 <script type="text/javascript">
 
-	var planetPosX = [0,35,69.4,98,129.2,167,205.4,205.4,246.5,288.1];
-	var planetRev = [0,0,0,0,0,0,0,0,0,0];
-	var revSpeed = [0,1.81,1.63,1.53,1.4,1.02,0.83,0.83,0.61,0.47];
-	var planetRot = [2000,1500,2500,500,500,250,280,280,400,1000]
-	var quaternion = new Array(10);
-	var target = new Array(10);
-	var axis = new Array(10);
+    //各変数設定
+    var planetPosX = [0, 35, 69.4, 98, 129.2, 167, 205.4, 205.4, 246.5, 288.1];
+    var planetRev = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var revSpeed = [0, 1.81, 1.63, 1.53, 1.4, 1.02, 0.83, 0.83, 0.61, 0.47];
+    var planetRot = [2000, 1500, 2500, 500, 500, 250, 280, 280, 400, 1000]
+    var quaternion = new Array(10);
+    var target = new Array(10);
+    var axis = new Array(10);
 
 
-  /* ここから各コンポーネントの挙動 */
+    /* ここから各コンポーネントの挙動 */
 
     //操作説明アラート
     //初回動作
     description();
 
-    function description(){
-      window.alert("【操作説明】\n・クリックorタップで公転します。(実際の軌道とは異なります。)\n・ドラッグor1本指スクロールで回転します。\n・その他メニューは左上の3本線のアイコンからどうぞ");
+    function description() {
+        window.alert("【操作説明】\n・クリックorタップで公転します。(実際の軌道とは異なります。)\n・ドラッグor1本指スクロールで回転します。\n・その他メニューは左上の3本線のアイコンからどうぞ");
     }
 
-    $(function(){
-      $('#description').on('click', function () {
-        description();
-      });
+    $(function () {
+        $('#description').on('click', function () {
+            description();
+        });
     });
 
-//　ハンバーガーメニュー
-  $(document).ready(function () {
-    $(".drawer").drawer();
-  });
-  // ハンバーガーメニューここまで
-
-  // 背景色が変更された時の挙動
-  $(function () {
-    $('input[name="radio_bg-color"]:radio').change(function () {
-      var radio_color = $(this).val();
-      renderer.setClearColor(radio_color, 1.0);  //変更された背景色
+    //　ハンバーガーメニュー
+    $(document).ready(function () {
+        $(".drawer").drawer();
     });
-  });
-  //背景色に関する項目ここまで
+    // ハンバーガーメニューここまで
+
+    // 背景色が変更された時の挙動
+    $(function () {
+        $('input[name="radio_bg-color"]:radio').change(function () {
+            var radio_color = $(this).val();
+            renderer.setClearColor(radio_color, 1.0);  //変更された背景色
+        });
+    });
+    //背景色に関する項目ここまで
 
 
-  /* ここからスマホ挙動の調整 */
-  // スクロールの改善
-  // "passive" が使えるかどうかを検出
-  var passiveSupported = false;
-  try {
-    document.addEventListener("test", null, Object.defineProperty({}, "passive", {
-      get: function () {
-        passiveSupported = true;
-      }
-    }));
-  } catch (err) {
-  }
-  // リスナーを登録
-  document.addEventListener("touchmove", function listener(e) {
-    /* do something */
-    e.preventDefault();
-  }, passiveSupported ? {passive: false} : false);
-  // スマホ画面での挙動調整ここまで
+    /* ここからスマホ挙動の調整 */
+    // スクロールの改善
+    // "passive" が使えるかどうかを検出
+    var passiveSupported = false;
+    try {
+        document.addEventListener("test", null, Object.defineProperty({}, "passive", {
+            get: function () {
+                passiveSupported = true;
+            }
+        }));
+    } catch (err) {
+    }
+    // リスナーを登録
+    document.addEventListener("touchmove", function listener(e) {
+        /* do something */
+        e.preventDefault();
+    }, passiveSupported ? {passive: false} : false);
+    // スマホ画面での挙動調整ここまで
 
 
-  /* ここからWebGLの処理を記述 */
-  //シーンを作成
-  var scene = new THREE.Scene();
+    /* ここからWebGLの処理を記述 */
+    //シーンを作成
+    var scene = new THREE.Scene();
 
-  //カメラを作成
-  var camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 10000);
-  camera.position.set(0, 160, 535);
+    //カメラを作成
+    var camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 10000);
+    camera.position.set(0, 160, 535);
 
     //カメラコントローラーを作成
-  const controls = new THREE.OrbitControls(camera);
+    const controls = new THREE.OrbitControls(camera);
 
-  //ここから3Dモデル生成のコード
-  mesh = [];
-  //物体1(太陽)
-  //メッシュを作成（ジオメトリとマテリアルを元にメッシュを作成）
-  const geometry_0 = new THREE.SphereGeometry(15, 50, 50);
-  // マテリアルにテクスチャーを設定
-  const material_0 = new THREE.MeshStandardMaterial({
-    map: new THREE.TextureLoader().load('textures/sun.jpg')
-  });
-  const mesh_0 = new THREE.Mesh(geometry_0, material_0);
-  // 傾きを追加
-  mesh_0.rotation.set((-23.4 * Math.PI / 180), 0, (-23.4 * Math.PI / 180));
-  //表示位置の設定
-  mesh_0.position.set(0, 0, 0);
-  //シーンに追加
-  scene.add(mesh_0);
-  
-  //物体2(水星)
-  //メッシュを作成（ジオメトリとマテリアルを元にメッシュを作成）
-  const geometry_1 = new THREE.SphereGeometry(9, 50, 50);
-  // マテリアルにテクスチャーを設定
-  const material_1 = new THREE.MeshStandardMaterial({
-    map: new THREE.TextureLoader().load('textures/mercury.jpg')
-  });
-  const mesh_1 = new THREE.Mesh(geometry_1, material_1);
-  // 傾きを追加
-  // オブジェクト名.rotation.set(x軸,y軸,z軸);
-  mesh_1.rotation.set((-0.027*Math.PI/180),0,(-0.027*Math.PI/180));
-  //表示位置の設定
-  mesh_1.position.set(35, 0, 0);
-  //シーンに追加
-  scene.add(mesh_1);
+    //ここから3Dモデル生成のコード
+    mesh = [];
+    //物体1(太陽)
+    //メッシュを作成（ジオメトリとマテリアルを元にメッシュを作成）
+    const geometry_0 = new THREE.SphereGeometry(15, 50, 50);
+    // マテリアルにテクスチャーを設定
+    const material_0 = new THREE.MeshStandardMaterial({
+        map: new THREE.TextureLoader().load('textures/sun.jpg')
+    });
+    const mesh_0 = new THREE.Mesh(geometry_0, material_0);
+    // 傾きを追加
+    mesh_0.rotation.set((-23.4 * Math.PI / 180), 0, (-23.4 * Math.PI / 180));
+    //表示位置の設定
+    mesh_0.position.set(0, 0, 0);
+    //シーンに追加
+    scene.add(mesh_0);
 
-  //物体3(金星)
-  //メッシュを作成（ジオメトリとマテリアルを元にメッシュを作成）
-  const geometry_2 = new THREE.SphereGeometry(9.9, 50, 50);
-  // マテリアルにテクスチャーを設定
-  const material_2 = new THREE.MeshStandardMaterial({
-    map: new THREE.TextureLoader().load('textures/venus.jpg')
-  });
-  const mesh_2 = new THREE.Mesh(geometry_2, material_2);
-  // 傾きを追加
-  // オブジェクト名.rotation.set(x軸,y軸,z軸);
-  mesh_2.rotation.set((-177.36*Math.PI/180),0,(-177.36*Math.PI/180));
-  //表示位置の設定
-  mesh_2.position.set(69.4, 0, 0);
-  //シーンに追加
-  scene.add(mesh_2);
+    //物体2(水星)
+    //メッシュを作成（ジオメトリとマテリアルを元にメッシュを作成）
+    const geometry_1 = new THREE.SphereGeometry(9, 50, 50);
+    // マテリアルにテクスチャーを設定
+    const material_1 = new THREE.MeshStandardMaterial({
+        map: new THREE.TextureLoader().load('textures/mercury.jpg')
+    });
+    const mesh_1 = new THREE.Mesh(geometry_1, material_1);
+    // 傾きを追加
+    // オブジェクト名.rotation.set(x軸,y軸,z軸);
+    mesh_1.rotation.set((-0.027 * Math.PI / 180), 0, (-0.027 * Math.PI / 180));
+    //表示位置の設定
+    mesh_1.position.set(35, 0, 0);
+    //シーンに追加
+    scene.add(mesh_1);
 
-  //物体4(地球)
-  //メッシュを作成（ジオメトリとマテリアルを元にメッシュを作成）
-  const geometry_3 = new THREE.SphereGeometry(10, 50, 50);
-  // マテリアルにテクスチャーを設定
-  const material_3 = new THREE.MeshStandardMaterial({
-    map: new THREE.TextureLoader().load('textures/earth.jpg')
-  });
-  const mesh_3 = new THREE.Mesh(geometry_3, material_3);
-  // 傾きを追加
-  // オブジェクト名.rotation.set(x軸,y軸,z軸);
-  mesh_3.rotation.set((-23.4 * Math.PI / 180), 0, (-23.4 * Math.PI / 180));
-  //表示位置の設定
-  mesh_3.position.set(98, 0, 0);
-  //シーンに追加
-  scene.add(mesh_3);
+    //物体3(金星)
+    //メッシュを作成（ジオメトリとマテリアルを元にメッシュを作成）
+    const geometry_2 = new THREE.SphereGeometry(9.9, 50, 50);
+    // マテリアルにテクスチャーを設定
+    const material_2 = new THREE.MeshStandardMaterial({
+        map: new THREE.TextureLoader().load('textures/venus.jpg')
+    });
+    const mesh_2 = new THREE.Mesh(geometry_2, material_2);
+    // 傾きを追加
+    // オブジェクト名.rotation.set(x軸,y軸,z軸);
+    mesh_2.rotation.set((-177.36 * Math.PI / 180), 0, (-177.36 * Math.PI / 180));
+    //表示位置の設定
+    mesh_2.position.set(69.4, 0, 0);
+    //シーンに追加
+    scene.add(mesh_2);
 
-  //物体5(火星)
-  //メッシュを作成（ジオメトリとマテリアルを元にメッシュを作成）
-  const geometry_4 = new THREE.SphereGeometry(9.3, 50, 50);
-  // マテリアルにテクスチャーを設定
-  const material_4 = new THREE.MeshStandardMaterial({
-    map: new THREE.TextureLoader().load('textures/mars.jpg')
-  });
-  const mesh_4 = new THREE.Mesh(geometry_4, material_4);
-  // 傾きを追加
-  // オブジェクト名.rotation.set(x軸,y軸,z軸);
-  mesh_4.rotation.set((-25.19*Math.PI/180),0,(-25.19*Math.PI/180));
-  //表示位置の設定
-  mesh_4.position.set(129.2, 0, 0);
-  //シーンに追加
-  scene.add(mesh_4);
+    //物体4(地球)
+    //メッシュを作成（ジオメトリとマテリアルを元にメッシュを作成）
+    const geometry_3 = new THREE.SphereGeometry(10, 50, 50);
+    // マテリアルにテクスチャーを設定
+    const material_3 = new THREE.MeshStandardMaterial({
+        map: new THREE.TextureLoader().load('textures/earth.jpg')
+    });
+    const mesh_3 = new THREE.Mesh(geometry_3, material_3);
+    // 傾きを追加
+    // オブジェクト名.rotation.set(x軸,y軸,z軸);
+    mesh_3.rotation.set((-23.4 * Math.PI / 180), 0, (-23.4 * Math.PI / 180));
+    //表示位置の設定
+    mesh_3.position.set(98, 0, 0);
+    //シーンに追加
+    scene.add(mesh_3);
 
-  //物体6(木星)
-  //メッシュを作成（ジオメトリとマテリアルを元にメッシュを作成）
-  const geometry_5 = new THREE.SphereGeometry(12.6, 50, 50);
-  // マテリアルにテクスチャーを設定
-  const material_5 = new THREE.MeshStandardMaterial({
-    map: new THREE.TextureLoader().load('textures/jupiter.jpg')
-  });
-  const mesh_5 = new THREE.Mesh(geometry_5, material_5);
-  // 傾きを追加
-  // オブジェクト名.rotation.set(x軸,y軸,z軸);
-  mesh_5.rotation.set((-3.13*Math.PI/180),0,(-3.13*Math.PI/180));
-  //表示位置の設定
-  mesh_5.position.set(167, 0, 0);
-  //シーンに追加
-  scene.add(mesh_5);
+    //物体5(火星)
+    //メッシュを作成（ジオメトリとマテリアルを元にメッシュを作成）
+    const geometry_4 = new THREE.SphereGeometry(9.3, 50, 50);
+    // マテリアルにテクスチャーを設定
+    const material_4 = new THREE.MeshStandardMaterial({
+        map: new THREE.TextureLoader().load('textures/mars.jpg')
+    });
+    const mesh_4 = new THREE.Mesh(geometry_4, material_4);
+    // 傾きを追加
+    // オブジェクト名.rotation.set(x軸,y軸,z軸);
+    mesh_4.rotation.set((-25.19 * Math.PI / 180), 0, (-25.19 * Math.PI / 180));
+    //表示位置の設定
+    mesh_4.position.set(129.2, 0, 0);
+    //シーンに追加
+    scene.add(mesh_4);
 
-  //物体7(土星)
-  //メッシュを作成（ジオメトリとマテリアルを元にメッシュを作成）
-  const geometry_6 = new THREE.SphereGeometry(12.4, 50, 50);
-  // マテリアルにテクスチャーを設定
-  const material_6 = new THREE.MeshStandardMaterial({
-    map: new THREE.TextureLoader().load('textures/saturn.jpg')
-  });
-  const mesh_6 = new THREE.Mesh(geometry_6, material_6);
-  // 傾きを追加
-  mesh_6.rotation.set((-25.33*Math.PI/180),0,(-25.33*Math.PI/180));
-  //表示位置の設定
-  mesh_6.position.set(205.4, 0, 0);
-  //シーンに追加
-  scene.add(mesh_6);
+    //物体6(木星)
+    //メッシュを作成（ジオメトリとマテリアルを元にメッシュを作成）
+    const geometry_5 = new THREE.SphereGeometry(12.6, 50, 50);
+    // マテリアルにテクスチャーを設定
+    const material_5 = new THREE.MeshStandardMaterial({
+        map: new THREE.TextureLoader().load('textures/jupiter.jpg')
+    });
+    const mesh_5 = new THREE.Mesh(geometry_5, material_5);
+    // 傾きを追加
+    // オブジェクト名.rotation.set(x軸,y軸,z軸);
+    mesh_5.rotation.set((-3.13 * Math.PI / 180), 0, (-3.13 * Math.PI / 180));
+    //表示位置の設定
+    mesh_5.position.set(167, 0, 0);
+    //シーンに追加
+    scene.add(mesh_5);
 
-  //物体8(土星の輪)
-  //メッシュを作成（ジオメトリとマテリアルを元にメッシュを作成）
-  const geometry_7 = new THREE.TorusGeometry(14, 1.2, 2, 100);
-  // マテリアルにテクスチャーを設定
-  const material_7 = new THREE.MeshStandardMaterial({
-    map: new THREE.TextureLoader().load('textures/saturn_ring.jpg')
-  });
-  const mesh_7 = new THREE.Mesh(geometry_7, material_7);
-  // 傾きを追加
-  mesh_7.rotation.set((-110*Math.PI/180),(25.33*Math.PI/180),(80.33*Math.PI/180));
-  //表示位置の設定
-  mesh_7.position.set(205.4, 0, 0);
-  //シーンに追加
-  scene.add(mesh_7);
+    //物体7(土星)
+    //メッシュを作成（ジオメトリとマテリアルを元にメッシュを作成）
+    const geometry_6 = new THREE.SphereGeometry(12.4, 50, 50);
+    // マテリアルにテクスチャーを設定
+    const material_6 = new THREE.MeshStandardMaterial({
+        map: new THREE.TextureLoader().load('textures/saturn.jpg')
+    });
+    const mesh_6 = new THREE.Mesh(geometry_6, material_6);
+    // 傾きを追加
+    mesh_6.rotation.set((-25.33 * Math.PI / 180), 0, (-25.33 * Math.PI / 180));
+    //表示位置の設定
+    mesh_6.position.set(205.4, 0, 0);
+    //シーンに追加
+    scene.add(mesh_6);
 
-  //物体9(天王星)
-  //メッシュを作成（ジオメトリとマテリアルを元にメッシュを作成）
-  const geometry_8 = new THREE.SphereGeometry(11.5, 50, 50);
-  // マテリアルにテクスチャーを設定
-  const material_8= new THREE.MeshStandardMaterial({
-    map: new THREE.TextureLoader().load('textures/uranus.jpg')
-  });
-  const mesh_8 = new THREE.Mesh(geometry_8, material_8);
-  // 傾きを追加
-  // オブジェクト名.rotation.set(x軸,y軸,z軸);
-  mesh_8.rotation.set((-97.86*Math.PI/180),0,(-97.86*Math.PI/180));
-  //表示位置の設定
-  mesh_8.position.set(246.5, 0, 0);
-  //シーンに追加
-  scene.add(mesh_8);
+    //物体8(土星の輪)
+    //メッシュを作成（ジオメトリとマテリアルを元にメッシュを作成）
+    const geometry_7 = new THREE.TorusGeometry(14, 1.2, 2, 100);
+    // マテリアルにテクスチャーを設定
+    const material_7 = new THREE.MeshStandardMaterial({
+        map: new THREE.TextureLoader().load('textures/saturn_ring.jpg')
+    });
+    const mesh_7 = new THREE.Mesh(geometry_7, material_7);
+    // 傾きを追加
+    mesh_7.rotation.set((-110 * Math.PI / 180), (25.33 * Math.PI / 180), (80.33 * Math.PI / 180));
+    //表示位置の設定
+    mesh_7.position.set(205.4, 0, 0);
+    //シーンに追加
+    scene.add(mesh_7);
 
-  //物体10(海王星)
-  //メッシュを作成（ジオメトリとマテリアルを元にメッシュを作成）
-  const geometry_9 = new THREE.SphereGeometry(11.5, 50, 50);
-  // マテリアルにテクスチャーを設定
-  const material_9 = new THREE.MeshStandardMaterial({
-    map: new THREE.TextureLoader().load('textures/neptune.jpg')
-  });
-  const mesh_9 = new THREE.Mesh(geometry_9, material_9);
-  // 傾きを追加
-  // オブジェクト名.rotation.set(x軸,y軸,z軸);
-  mesh_9.rotation.set((-28.32*Math.PI/180),0,(-28.32*Math.PI/180));
-  //表示位置の設定
-  mesh_9.position.set(288.1, 0, 0);
-  //シーンに追加
-  scene.add(mesh_9);
-  
-  mesh.push(mesh_0,mesh_1,mesh_2,mesh_3,mesh_4,mesh_5,mesh_6,mesh_7,mesh_8,mesh_9);
-  flg = [0,0,0,0,0,0,0,0,0,0];
-  //メッシュの更新を許可
-  //mesh[1].needsUpdate = true;
+    //物体9(天王星)
+    //メッシュを作成（ジオメトリとマテリアルを元にメッシュを作成）
+    const geometry_8 = new THREE.SphereGeometry(11.5, 50, 50);
+    // マテリアルにテクスチャーを設定
+    const material_8 = new THREE.MeshStandardMaterial({
+        map: new THREE.TextureLoader().load('textures/uranus.jpg')
+    });
+    const mesh_8 = new THREE.Mesh(geometry_8, material_8);
+    // 傾きを追加
+    // オブジェクト名.rotation.set(x軸,y軸,z軸);
+    mesh_8.rotation.set((-97.86 * Math.PI / 180), 0, (-97.86 * Math.PI / 180));
+    //表示位置の設定
+    mesh_8.position.set(246.5, 0, 0);
+    //シーンに追加
+    scene.add(mesh_8);
 
-  //ここまでが3Dモデル生成のコード　生成物により変更
+    //物体10(海王星)
+    //メッシュを作成（ジオメトリとマテリアルを元にメッシュを作成）
+    const geometry_9 = new THREE.SphereGeometry(11.5, 50, 50);
+    // マテリアルにテクスチャーを設定
+    const material_9 = new THREE.MeshStandardMaterial({
+        map: new THREE.TextureLoader().load('textures/neptune.jpg')
+    });
+    const mesh_9 = new THREE.Mesh(geometry_9, material_9);
+    // 傾きを追加
+    // オブジェクト名.rotation.set(x軸,y軸,z軸);
+    mesh_9.rotation.set((-28.32 * Math.PI / 180), 0, (-28.32 * Math.PI / 180));
+    //表示位置の設定
+    mesh_9.position.set(288.1, 0, 0);
+    //シーンに追加
+    scene.add(mesh_9);
 
-  // // 平行光源
-  // const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 0.5);
-  // directionalLight.position.set(0, 0, 1);
-  // //シーンに追加
-  // scene.add(directionalLight);
+    mesh.push(mesh_0, mesh_1, mesh_2, mesh_3, mesh_4, mesh_5, mesh_6, mesh_7, mesh_8, mesh_9);
+    flg = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    //メッシュの更新を許可
+    //mesh[1].needsUpdate = true;
 
-  //環境光
-  const light = new THREE.AmbientLight(0xFFFFFF, 2.3);
-  scene.add(light);
+    //ここまでが3Dモデル生成のコード　生成物により変更
 
-  //レンダラに渡す
-  var renderer = new THREE.WebGLRenderer();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setClearColor(0x202020, 1.0);  //初期 黒色
+    // // 平行光源
+    // const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 0.5);
+    // directionalLight.position.set(0, 0, 1);
+    // //シーンに追加
+    // scene.add(directionalLight);
 
-  //bodyへ追加し、表示
-  document.body.appendChild(renderer.domElement);
-  //console.log(renderer.domElement);
+    //環境光
+    const light = new THREE.AmbientLight(0xFFFFFF, 2.3);
+    scene.add(light);
 
-  // 毎フレーム実行 (アニメーションさせる)
-  var animate = function () {
-    requestAnimationFrame(animate);
+    //レンダラに渡す
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x202020, 1.0);  //初期 黒色
 
-    // カメラを操作する
-    //常に原点を見つめる
-    camera.lookAt(new THREE.Vector3(0, 0, 0));
-    renderer.render(scene, camera);
-	
-	//土星の輪
-	flg[7] = flg[6]==1 ? flg[7]=1 : flg[7]=0;
-	flg[6] = flg[7]==1 ? flg[6]=1 : flg[6]=0;
-    
-	for(var i=1 ; flg.length>=i ; i++)if(flg[i]==1)PlanetAnimate(i);
-	if(flg[0] == 1){
-		quaternion[0] = mesh[0].quaternion;
-	
-		target[0] = new THREE.Quaternion();
-		axis[0] = new THREE.Vector3(0, 1, 0).normalize();
-		target[0].setFromAxisAngle(axis[0], -Math.PI/planetRot[0]);
-		
-		quaternion[0].multiply(target[0]);
-	}
+    //bodyへ追加し、表示
+    document.body.appendChild(renderer.domElement);
 
-  };
-  animate();
-  //３Dモデル作成,描画に関する項目ここまで
+    // 毎フレーム実行 (アニメーションさせる)
+    var animate = function () {
+        requestAnimationFrame(animate);
 
+        // カメラを操作する
+        //常に原点を見つめる
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
+        renderer.render(scene, camera);
 
-  //画面回転等でリサイズがあった場合の挙動
-  //初期化
-  onResize();
+        //土星の輪
+        flg[7] = flg[6] == 1 ? flg[7] = 1 : flg[7] = 0;
+        flg[6] = flg[7] == 1 ? flg[6] = 1 : flg[6] = 0;
 
-  //リサイズイベント発生時に実行
-  window.addEventListener('resize', onResize);
+        for (var i = 1; flg.length >= i; i++) if (flg[i] == 1) PlanetAnimate(i);
+        if (flg[0] == 1) {
+            quaternion[0] = mesh[0].quaternion;
 
-  function onResize() {  // サイズを取得
-    var width = window.innerWidth;
-    var height = window.innerHeight;
+            target[0] = new THREE.Quaternion();
+            axis[0] = new THREE.Vector3(0, 1, 0).normalize();
+            target[0].setFromAxisAngle(axis[0], -Math.PI / planetRot[0]);
 
-    // レンダラのサイズを調整する
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(width, height);
+            quaternion[0].multiply(target[0]);
+        }
 
-    // カメラのアスペクト比を正す
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-  }
-  //画面サイズ変更に関する項目ここまで
-  
-  var onmousedown = function(e) {
-		var rect = e.target.getBoundingClientRect();
-		//画面上のマウス位置
-		var mouseX = e.clientX - rect.left;
-		var mouseY = e.clientY - rect.top;
-		
-		//canvas内のマウス位置
-		mouseX = (mouseX/window.innerWidth) *2 - 1;
-		mouseY =-(mouseY/window.innerHeight)*2 + 1;
-		
-		//マウスのベクトル
-		var pos = new THREE.Vector3(mouseX, mouseY, 1);
-		pos.unproject(camera);
-		console.log(mesh.length);
-		//マウスの位置上にレイを生成
-		var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
-		for(var i=0 ; mesh.length>=i ; i++){
-			var obj = ray.intersectObjects([mesh[i]]);
-			//０より大きい場合、オブジェクトに交差する
-			if (obj.length > 0) {
-				console.log(i+"nyaaaa");
-				flg[i] = flg[i]==0 ? flg[i] = 1 : flg[i] = 0;
-				break;
-			}
-			
-		}
-		console.log(flg);
-		console.log(mesh[7].position.x);
-};
-var ontouchend = function(e) {
-		var rect = e.target.getBoundingClientRect();
-		//画面上のマウス位置
-		var mouseX = e.clientX - rect.left;
-		var mouseY = e.clientY - rect.top;
-		
-		//canvas内のマウス位置
-		mouseX = (mouseX/window.innerWidth) *2 - 1;
-		mouseY =-(mouseY/window.innerHeight)*2 + 1;
-		
-		//マウスのベクトル
-		var pos = new THREE.Vector3(mouseX, mouseY, 1);
-		pos.unproject(camera);
-		console.log(mesh.length);
-		//マウスの位置上にレイを生成
-		var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
-		for(var i=0 ; mesh.length>=i ; i++){
-			var obj = ray.intersectObjects([mesh[i]]);
-			//０より大きい場合、オブジェクトに交差する
-			if (obj.length > 0) {
-				console.log(i+"nyaaaa");
-				flg[i] = flg[i]==0 ? flg[i] = 1 : flg[i] = 0;
-				break;
-			}
-			
-		}
-		console.log(flg);
-		console.log(mesh[7].position.x);
-};
+    };
+    animate();
+    //３Dモデル作成,描画に関する項目ここまで
 
-function PlanetAnimate(num){
-		//物体の移動
-		planetRev[num] -= revSpeed[num];
-		mesh[num].position.x = Math.cos(THREE.Math.degToRad(planetRev[num]))*planetPosX[num];
-		mesh[num].position.z = Math.sin(THREE.Math.degToRad(planetRev[num]))*planetPosX[num];
-		
-		quaternion[num] = mesh[num].quaternion;	
-		target[num] = new THREE.Quaternion();
-		if(num!=7){
-			axis[num] = new THREE.Vector3(0, 1, 0).normalize();
-		}else{
-			axis[num] = new THREE.Vector3(0, 0, 1).normalize();
-		}
-		target[num].setFromAxisAngle(axis[num], Math.PI/planetRot[num]);	
-		quaternion[num].multiply(target[num]);
-		console.log(mesh[num].position.x - planetPosX[num]);
-		if((mesh[num].position.x - planetPosX[num])<0.005&&(mesh[num].position.x - planetPosX[num])>-0.005){
-			flg[num] = 0;
-			planetRev[num] = 0;
-			mesh[num].position.x = planetPosX[num];
-		}
-}
+    //画面回転等でリサイズがあった場合の挙動
+    //初期化
+    onResize();
 
+    //リサイズイベント発生時に実行
+    window.addEventListener('resize', onResize);
+
+    function onResize() {  // サイズを取得
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+
+        // レンダラのサイズを調整する
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(width, height);
+
+        // カメラのアスペクト比を正す
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+    }
+
+    //画面サイズ変更に関する項目ここまで
+
+    //クリックイベントで公転
+    var onmousedown = function (e) {
+        var rect = e.target.getBoundingClientRect();
+        //画面上のマウス位置
+        var mouseX = e.clientX - rect.left;
+        var mouseY = e.clientY - rect.top;
+
+        //canvas内のマウス位置
+        mouseX = (mouseX / window.innerWidth) * 2 - 1;
+        mouseY = -(mouseY / window.innerHeight) * 2 + 1;
+
+        //マウスのベクトル
+        var pos = new THREE.Vector3(mouseX, mouseY, 1);
+        pos.unproject(camera);
+        //マウスの位置上にレイを生成
+        var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
+        for (var i = 0; mesh.length >= i; i++) {
+            var obj = ray.intersectObjects([mesh[i]]);
+            //０より大きい場合、オブジェクトに交差する
+            if (obj.length > 0) {
+                flg[i] = flg[i] == 0 ? flg[i] = 1 : flg[i] = 0;
+                break;
+            }
+        }
+    };
+
+    //クリックイベントで公転(スマートフォン用)
+    var ontouchend = function (e) {
+        var rect = e.target.getBoundingClientRect();
+        //画面上のマウス位置
+        var mouseX = e.clientX - rect.left;
+        var mouseY = e.clientY - rect.top;
+
+        //canvas内のマウス位置
+        mouseX = (mouseX / window.innerWidth) * 2 - 1;
+        mouseY = -(mouseY / window.innerHeight) * 2 + 1;
+
+        //マウスのベクトル
+        var pos = new THREE.Vector3(mouseX, mouseY, 1);
+        pos.unproject(camera);
+        //マウスの位置上にレイを生成
+        var ray = new THREE.Raycaster(camera.position, pos.sub(camera.position).normalize());
+        for (var i = 0; mesh.length >= i; i++) {
+            var obj = ray.intersectObjects([mesh[i]]);
+            //０より大きい場合、オブジェクトに交差する
+            if (obj.length > 0) {
+                F
+                flg[i] = flg[i] == 0 ? flg[i] = 1 : flg[i] = 0;
+                break;
+            }
+        }
+    };
+
+    //公転アニメーション
+    function PlanetAnimate(num) {
+        //物体の移動
+        planetRev[num] -= revSpeed[num];
+        mesh[num].position.x = Math.cos(THREE.Math.degToRad(planetRev[num])) * planetPosX[num];
+        mesh[num].position.z = Math.sin(THREE.Math.degToRad(planetRev[num])) * planetPosX[num];
+
+        quaternion[num] = mesh[num].quaternion;
+        target[num] = new THREE.Quaternion();
+        if (num != 7) {
+            axis[num] = new THREE.Vector3(0, 1, 0).normalize();
+        } else {
+            axis[num] = new THREE.Vector3(0, 0, 1).normalize();
+        }
+        target[num].setFromAxisAngle(axis[num], Math.PI / planetRot[num]);
+        quaternion[num].multiply(target[num]);
+        if ((mesh[num].position.x - planetPosX[num]) < 0.005 && (mesh[num].position.x - planetPosX[num]) > -0.005) {
+            flg[num] = 0;
+            planetRev[num] = 0;
+            mesh[num].position.x = planetPosX[num];
+        }
+    }
 </script>
 </body>
 </html>

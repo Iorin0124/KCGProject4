@@ -41,14 +41,15 @@
 <nav class="drawer-nav">
     <ul class="drawer-menu" id="drawer-space">
         <li><span class="description" type="button" id="description">操作説明</span></li>
-        <li class="pt-1"><input type="radio" id="radio-bg-color1" name="radio_bg-color" value="#fff8dc"><label for="radio-bg-color1"
-                                                                                                               id="bg-color1">背景色1</label>
+        <li class="pt-1"><input type="radio" id="radio-bg-color1" name="radio_bg-color" value="#fff8dc">
+            <label for="radio-bg-color1" id="bg-color1">背景色1</label>
         </li>
-        <li><input type="radio" id="radio-bg-color2" name="radio_bg-color" value="#f0f8ff"><label for="radio-bg-color2"
-                                                                                                  id="bg-color2">背景色2</label>
+        <li><input type="radio" id="radio-bg-color2" name="radio_bg-color" value="#f0f8ff">
+            <label for="radio-bg-color2" id="bg-color2">背景色2</label>
         </li>
-        <li><input type="radio" id="radio-bg-color3" name="radio_bg-color" value="#202020" checked="checked"><label
-                for="radio-bg-color3" id="bg-color3">背景色3</label></li>
+        <li><input type="radio" id="radio-bg-color3" name="radio_bg-color" value="#202020" checked="checked">
+            <label for="radio-bg-color3" id="bg-color3">背景色3</label>
+        </li>
         <li class="pt-1"><a class="link" href="mars_information.html">木星の情報</a></li>
         <li><a class="link" href="planetList.html">太陽系惑星一覧</a></li>
         <li><a class="link" href="index.html">Top page</a></li>
@@ -79,7 +80,6 @@
 </div>
 <!--　ヘッダーここまで　-->
 
-
 <script type="text/javascript">
     /* ここから各コンポーネントの挙動 */
 
@@ -87,11 +87,11 @@
     //初回動作
     description();
 
-    function description(){
+    function description() {
         window.alert("【操作説明】\n・クリックorタップで自転します。\n・ドラッグor1本指スクロールで回転します。\n・その他メニューは左上の3本線のアイコンからどうぞ");
     }
 
-    $(function(){
+    $(function () {
         $('#description').on('click', function () {
             description();
         });
@@ -113,7 +113,6 @@
     });
     //背景色に関する項目ここまで
 
-
     /* ここからスマホ挙動の調整 */
     // スクロールの改善
     // "passive" が使えるかどうかを検出
@@ -132,7 +131,6 @@
         e.preventDefault();
     }, passiveSupported ? {passive: false} : false);
     // スマホ画面での挙動調整ここまで
-
 
     /* ここからWebGLの処理を記述 */
     //シーンを作成
@@ -154,8 +152,7 @@
         map: new THREE.TextureLoader().load('textures/jupiter.jpg')
     });
     const mesh = new THREE.Mesh(geometry, material);
-    // 傾きを追加してみる
-    // オブジェクト名.rotation.set(x軸,y軸,z軸);
+    // 傾きを追加
     mesh.rotation.set((-3.13 * Math.PI / 180), 0, (-3.13 * Math.PI / 180));
 
     //表示位置の設定
@@ -184,7 +181,6 @@
 
     //bodyへ追加し、表示
     document.body.appendChild(renderer.domElement);
-    //console.log(renderer.domElement);
 
     // 毎フレーム実行 (アニメーションさせる)
     var animate = function () {
@@ -194,11 +190,6 @@
         //常に原点を見つめる
         camera.lookAt(new THREE.Vector3(0, 0, 0));
 
-        // 回転行列を適用させる…？
-        //   mesh.rotation.x -= 0.005;
-        /*mesh.rotation.x += 0.025;
-        mesh.rotation.z += 0.025;
-        renderer.render(scene, camera);*/
         renderer.render(scene, camera);
         if (flg) {
             var quaternion = mesh.quaternion;
@@ -212,7 +203,6 @@
     };
     animate();
     //３Dモデル作成,描画に関する項目ここまで
-
 
     //画面回転等でリサイズがあった場合の挙動
     //初期化
@@ -236,6 +226,7 @@
 
     //画面サイズ変更に関する項目ここまで
 
+    //クリックイベントで自転
     var onmousedown = function (e) {
         var rect = e.target.getBoundingClientRect();
         //画面上のマウス位置
@@ -257,10 +248,10 @@
         //０より大きい場合、オブジェクトに交差する
         if (obj.length > 0) {
             flg = flg ? false : true;
-            console.log("nyaaaa");
         }
     };
 
+    //クリックイベントで自転(スマートフォン用)
     var ontouchend = function (e) {
         var rect = e.target.getBoundingClientRect();
         //画面上のマウス位置
@@ -282,14 +273,8 @@
         //０より大きい場合、オブジェクトに交差する
         if (obj.length > 0) {
             flg = flg ? false : true;
-            console.log("nyaaaa");
         }
-
-
     };
-
 </script>
-
-
 </body>
 </html>
